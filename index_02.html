@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ko"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;알파본부 리크루팅&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root { --bg-color: #1F1F1F; --accent-color: #FFD700; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { margin: 0; background-color: var(--bg-color); font-family: 'Pretendard', sans-serif; color: white; overflow-x: hidden; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>img { width: 100%; display: block; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 섹션 공통 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>section { width: 100%; position: relative; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 6가지 특화 서비스 박스 애니메이션 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.service-container { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 15px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.service-box {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s ease-in-out;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 재현님이 원하신 미세한 떨림/확대 효과 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.service-box:active, .service-box:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.02);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>filter: brightness(1.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 사진 스와이프 구간 (Swiper) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.swiper { width: 100%; height: auto; padding: 20px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.swiper-slide { display: flex; justify-content: center; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.swiper-pagination-bullet-active { background: var(--accent-color) !important; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 고정형 하단 상담 버튼 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.fixed-footer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed; bottom: 0; width: 100%; z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(transparent, rgba(0,0,0,0.8));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px 0; display: flex; justify-content: center; gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--accent-color); color: black; font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 25px; border-radius: 30px; text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 10px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="Alpha_Recruit.jpg" alt="연금 전문가 모집"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="text-align: center; padding: 40px 0 20px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 style="font-size: 1.5rem;"&gt;고객사 임직원을 위한&lt;br&gt;6가지 특화 서비스&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="service-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box1.png" alt="상담센터 운영"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box2.png" alt="임직원 교육 155회"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box3.png" alt="자산관리 첫걸음"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box4.png" alt="우리사주 세미나"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box5.png" alt="AI 가이드북"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="service-box"&gt;&lt;img src="box6.png" alt="전문가 양성"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section style="background-color: #111; padding-bottom: 50px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="text-align: center; padding: 30px 0 10px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="color: #888; font-size: 0.9rem;"&gt;현장 &amp; 교육&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 style="margin-top: 5px;"&gt;알파본부의 생생한 교육 현장&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="swiper mySwiper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="swiper-wrapper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="swiper-slide"&gt;&lt;img src="4.jpg" style="width: 90%; border-radius: 15px;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="swiper-slide"&gt;&lt;img src="6.jpg" style="width: 90%; border-radius: 15px;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="swiper-slide"&gt;&lt;img src="7.jpg" style="width: 90%; border-radius: 15px;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="swiper-pagination"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;section style="padding: 60px 20px 120px; text-align: center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="15.png" alt="상담 신청 QR 및 안내" style="max-width: 300px; margin: 0 auto;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="fixed-footer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="tel:01037329326" class="btn"&gt;📞 김재현 본부장 전화하기&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn" style="background-color: #FEE500;"&gt;💬 오픈채팅 문의&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var swiper = new Swiper(".mySwiper", {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pagination: { el: ".swiper-pagination", clickable: true },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loop: true,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>autoplay: { delay: 3000 }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
