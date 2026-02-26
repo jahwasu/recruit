@@ -9,24 +9,25 @@
         :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
         body { margin: 0; background-color: var(--bg-color); font-family: sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
-        
-        /* 전체 스크롤 섹션 */
         section { width: 100%; position: relative; }
 
-        /* 사진 스와이프 구간 설정 */
-        .photo-section { background-color: #111; padding: 40px 0; text-align: center; }
-        .section-title { margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; }
-        
-        .swiper { width: 100%; padding-bottom: 30px; }
-        .swiper-slide { display: flex; justify-content: center; align-items: center; }
-        .swiper-slide img { 
+        /* 공통 스와이프 박스 스타일 */
+        .content-box { 
             width: 90%; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
+            margin: 20px auto; 
+            background: #2A2A2A; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
+        
+        /* 스와이퍼 크기 조절 */
+        .swiper { width: 100%; height: auto; }
+        .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
 
         /* 하단 고정 버튼 */
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.85); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
         .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
     </style>
 </head>
@@ -34,23 +35,35 @@
 
     <section><img src="Alpha_Recruit.jpg"></section>
 
-    <section style="padding: 20px;">
-        <img src="2.png" style="margin-bottom:15px;">
-        <img src="3.png" style="margin-bottom:15px;">
-        <img src="5.png" style="margin-bottom:15px;">
-        <img src="8.png" style="margin-bottom:15px;">
-        <img src="9.png" style="margin-bottom:15px;">
+    <section style="padding: 10px 0;">
+        <img src="2.png"><img src="3.png">
     </section>
 
-    <section class="photo-section">
-        <div class="section-title">현장 & 교육</div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="4.png"></div>
-                <div class="swiper-slide"><img src="6.png"></div>
-                <div class="swiper-slide"><img src="7.png"></div>
-                <div class="swiper-slide"><img src="10.png"></div> <div class="swiper-slide"><img src="11.png"></div> </div>
-            <div class="swiper-pagination"></div>
+    <section>
+        <div class="content-box">
+            <div class="section-label">AI 기반 상담가이드북 일부</div>
+            <div class="swiper guideSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="10.png"></div>
+                    <div class="swiper-slide"><img src="11.png"></div>
+                    <div class="swiper-slide"><img src="5.png"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-box">
+            <div class="section-label">현장 & 교육 현장</div>
+            <div class="swiper fieldSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="4.png"></div>
+                    <div class="swiper-slide"><img src="6.png"></div>
+                    <div class="swiper-slide"><img src="7.png"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
         </div>
     </section>
 
@@ -63,19 +76,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            effect: "slide",
-            loop: true, // 무한 반복
-            centeredSlides: true,
-            slidesPerView: 1,
-            autoplay: {
-                delay: 3000, // 3초마다 자동 전환
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
+        // AI 가이드북 스와이프
+        new Swiper(".guideSwiper", {
+            loop: true,
+            autoplay: { delay: 3500 },
+            pagination: { el: ".swiper-pagination" },
+        });
+
+        // 현장 및 교육 스와이프
+        new Swiper(".fieldSwiper", {
+            loop: true,
+            autoplay: { delay: 3000 },
+            pagination: { el: ".swiper-pagination" },
         });
     </script>
 </body>
