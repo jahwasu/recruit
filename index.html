@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Recruit</title>
+    <title>알파본부 리크루팅</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
         body { margin: 0; background-color: var(--bg-color); font-family: sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
-        .content-box { width: 92%; margin: 20px auto; background: #2A2A2A; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* 스와이프 박스 스타일 */
+        .content-box { 
+            width: 92%; margin: 20px auto; background: #2A2A2A; 
+            border-radius: 20px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
         .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
         .swiper { width: 100%; height: auto; }
         .swiper-pagination-bullet-active { background: var(--accent-color) !important; }
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
+
+        /* 하단 고정 버튼 */
+        .fixed-footer { 
+            position: fixed; bottom: 0; width: 100%; z-index: 1000; 
+            background: rgba(0,0,0,0.9); padding: 15px 0; 
+            display: flex; justify-content: center; gap: 10px; 
+        }
+        .btn { 
+            background-color: var(--accent-color); color: black; font-weight: bold; 
+            padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; 
+        }
     </style>
 </head>
 <body>
 
     <section>
-        <img src="alpha_recruit.png" alt="메인 이미지 (업로드 확인 필요)">
+        <img src="alpha_recruit.png" alt="메인 이미지">
     </section>
 
     <section>
@@ -40,6 +55,7 @@
                     <div class="swiper-slide"><img src="10.png"></div>
                     <div class="swiper-slide"><img src="11.png"></div>
                     <div class="swiper-slide"><img src="12.png"></div>
+                    <div class="swiper-slide"><img src="13.png"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -71,8 +87,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        new Swiper(".guideSwiper", { loop: true, autoplay: { delay: 3500 }, pagination: { el: ".swiper-pagination" } });
-        new Swiper(".fieldSwiper", { loop: true, autoplay: { delay: 3000 }, pagination: { el: ".swiper-pagination" } });
+        // 가이드북 스와이프 (3.5초 간격)
+        new Swiper(".guideSwiper", {
+            loop: true,
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
+
+        // 현장 사진 스와이프 (3초 간격)
+        new Swiper(".fieldSwiper", {
+            loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
     </script>
 </body>
 </html>
