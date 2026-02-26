@@ -5,113 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>알파본부 리크루팅</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
-        body { margin: 0; background-color: var(--bg-color); font-family: 'Pretendard', sans-serif; color: white; overflow-x: hidden; }
+        body { margin: 0; background-color: var(--bg-color); font-family: 'Noto Sans KR', sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
         
-        /* 1페이지 메인 이미지 내 투명 클릭 영역 */
-        .main-btn-link {
-            position: absolute;
-            top: 64%; left: 30%; width: 40%; height: 8%;
-            cursor: pointer; z-index: 10;
-        }
+        /* 1페이지 입사문의 투명 클릭 영역 */
+        .main-btn-link { position: absolute; top: 64%; left: 30%; width: 40%; height: 8%; cursor: pointer; z-index: 10; }
 
-        /* [수정] 현장 & 교육 전용 사진틀 프레임 디자인 */
+        /* 젠스파크 스타일 프레임 */
         .frame-container { 
-            width: 94%; 
-            margin: 30px auto; 
-            background: #262626; 
-            border-radius: 25px; 
-            padding: 25px 0 15px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            text-align: center;
+            width: 92%; margin: 30px auto; background: #262626; border-radius: 20px; 
+            padding: 30px 0 15px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center;
         }
-        .frame-header { font-size: 1.6rem; font-weight: 800; margin-bottom: 5px; color: white; }
-        .frame-subheader { font-size: 0.95rem; font-weight: 400; color: #BBB; margin-bottom: 25px; }
-        
-        /* 스와이프 영역 내 사진 모서리 둥글게 */
-        .swiper { width: 90%; margin: 0 auto; border-radius: 15px; overflow: hidden; }
-        .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
+        .section-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+        .section-subtitle { font-size: 16px; color: #cbd5e0; margin-bottom: 25px; }
 
-        /* [요청사항] 하단 긴 선과 점 인디케이터 */
-        .pagination-container { margin-top: 20px; padding-bottom: 10px; }
-        .swiper-pagination { position: relative !important; bottom: 0 !important; }
-        .swiper-pagination-bullet { 
-            width: 8px; height: 8px; background: #555; opacity: 1; transition: all 0.3s; 
+        /* 스와이프 및 사진 캡션 스타일 */
+        .swiper { width: 90%; border-radius: 12px; overflow: hidden; }
+        .slide-item { position: relative; cursor: pointer; }
+        .slide-caption { 
+            position: absolute; bottom: 0; left: 0; right: 0; 
+            background: rgba(0, 0, 0, 0.75); padding: 15px; text-align: left;
         }
-        .swiper-pagination-bullet-active { 
-            width: 28px; border-radius: 5px; background: var(--accent-color) !important; 
+        .caption-title { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+        .caption-meta { font-size: 13px; opacity: 0.8; }
+
+        /* 인디케이터 (긴 선과 점) */
+        .swiper-pagination { position: relative !important; margin-top: 15px !important; bottom: 0 !important; }
+        .swiper-pagination-bullet { width: 8px; height: 8px; background: rgba(255,255,255,0.3); opacity: 1; transition: all 0.3s; }
+        .swiper-pagination-bullet-active { width: 24px; border-radius: 4px; background: #fff !important; }
+
+        /* 클릭 시 확대 모달 (젠스파크 기능) */
+        .modal { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; flex-direction: column;
         }
+        .modal.active { display: flex; }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: white; }
+        .modal-img { max-width: 90%; max-height: 70%; object-fit: contain; }
 
         /* 하단 고정 버튼 */
-        .fixed-footer { 
-            position: fixed; bottom: 0; width: 100%; z-index: 1000; 
-            background: rgba(0,0,0,0.92); padding: 15px 0; 
-            display: flex; justify-content: center; gap: 10px; 
-        }
-        .btn { 
-            background-color: var(--accent-color); color: black; font-weight: bold; 
-            padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; 
-        }
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+        .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <section>
-        <img src="alpha_recruit.png" alt="메인 이미지">
+        <img src="alpha_recruit.png">
         <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-btn-link"></a>
     </section>
 
-    <section>
-        <img src="2.png">
-        <img src="8.png">
-        <img src="9.png">
-    </section>
+    <section><img src="2.png"></section>
+    <section><img src="8.png"></section>
+    <section><img src="9.png"></section>
 
     <section>
         <div class="frame-container">
-            <div class="frame-header">현장 & 교육</div>
-            <div class="frame-subheader">알파본부의 생생한 자산관리 교육 현장</div>
+            <h1 class="section-title">현장 & 교육</h1>
+            <p class="section-subtitle">알파본부의 생생한 자산관리 교육 현장</p>
             
-            <div class="swiper fieldSwiper">
+            <div class="swiper fSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="신입사원집체교육_일반직.jpg"></div>
-                    <div class="swiper-slide"><img src="신입사원집체교육_정규직.jpg"></div>
-                    <div class="swiper-slide"><img src="조합원교육.jpg"></div>
-                    <div class="swiper-slide"><img src="조합원교육광명.jpg"></div>
-                    <div class="swiper-slide"><img src="부부동반세미나_2.jpg"></div>
+                    <div class="swiper-slide slide-item" onclick="openModal('신입사원집체교육_일반직.jpg', '26년 상반기 신입사원 교육', '연수원')">
+                        <img src="신입사원집체교육_일반직.jpg">
+                        <div class="slide-caption"><div class="caption-title">26년 상반기 신입사원 교육</div><div class="caption-meta">연수원</div></div>
+                    </div>
+                    <div class="swiper-slide slide-item" onclick="openModal('신입사원집체교육_정규직.jpg', '25년 하반기 신입사원 교육', '연수원')">
+                        <img src="신입사원집체교육_정규직.jpg">
+                        <div class="slide-caption"><div class="caption-title">25년 하반기 신입사원 교육</div><div class="caption-meta">연수원</div></div>
+                    </div>
+                    <div class="swiper-slide slide-item" onclick="openModal('조합원교육.jpg', '25년 임직원 교육', '외부 연수원')">
+                        <img src="조합원교육.jpg">
+                        <div class="slide-caption"><div class="caption-title">25년 임직원 교육</div><div class="caption-meta">외부 연수원</div></div>
+                    </div>
+                    <div class="swiper-slide slide-item" onclick="openModal('조합원교육광명.jpg', '25년 임직원 교육', '외부 연수원')">
+                        <img src="조합원교육광명.jpg">
+                        <div class="slide-caption"><div class="caption-title">25년 임직원 교육</div><div class="caption-meta">외부 연수원</div></div>
+                    </div>
+                    <div class="swiper-slide slide-item" onclick="openModal('부부동반세미나_2.jpg', '25년 부부동반 세미나', '교육장')">
+                        <img src="부부동반세미나_2.jpg">
+                        <div class="slide-caption"><div class="caption-title">25년 부부동반 세미나</div><div class="caption-meta">교육장</div></div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="pagination-container">
                 <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
 
-    <section style="padding-bottom:110px;">
-        <img src="15.png">
-    </section>
+    <section style="padding-bottom:100px;"><img src="15.png"></section>
 
     <div class="fixed-footer">
         <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
         <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
     </div>
 
+    <div id="modal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" class="modal-img">
+        <div style="margin-top:20px; text-align:center;">
+            <div id="modalTitle" style="font-size:18px; font-weight:bold;"></div>
+            <div id="modalMeta" style="font-size:15px; opacity:0.8; margin-top:5px;"></div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            new Swiper(".fieldSwiper", {
-                loop: true,
-                autoplay: { delay: 3000, disableOnInteraction: false },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-            });
+        new Swiper(".fSwiper", {
+            loop: true,
+            autoplay: { delay: 3000 },
+            pagination: { el: ".swiper-pagination", clickable: true }
         });
+
+        function openModal(src, title, meta) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMeta').innerText = meta;
+            document.getElementById('modal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
     </script>
 </body>
 </html>
