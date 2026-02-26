@@ -11,8 +11,12 @@
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
         
-        /* 1페이지 버튼 클릭 영역 */
-        .main-btn { position: absolute; top: 64%; left: 30%; width: 40%; height: 8%; cursor: pointer; z-index: 10; }
+        /* 1페이지 메인 이미지 내 투명 클릭 영역 */
+        .main-btn-link {
+            position: absolute;
+            top: 64%; left: 30%; width: 40%; height: 8%;
+            cursor: pointer; z-index: 10;
+        }
 
         /* 사진틀 고정 박스 */
         .content-box { 
@@ -22,24 +26,35 @@
         }
         .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
         
-        /* 스와이프 영역 및 인디케이터(긴 선과 점) 설정 */
-        .swiper { width: 100%; padding-bottom: 40px; }
+        /* 스와이프 영역 설정 */
+        .swiper { width: 100%; height: auto; padding-bottom: 50px; } /* 하단 인디케이터 공간 확보 */
+        
+        /* 인디케이터 스타일 (긴 선과 점) */
+        .swiper-pagination { bottom: 15px !important; }
         .swiper-pagination-bullet { 
-            width: 8px; height: 8px; background: #888; opacity: 1; transition: all 0.3s; 
+            width: 8px; height: 8px; background: #FFFFFF; opacity: 0.5; transition: all 0.3s; 
         }
         .swiper-pagination-bullet-active { 
-            width: 24px; border-radius: 5px; background: var(--accent-color) !important; 
+            width: 30px; border-radius: 5px; background: var(--accent-color) !important; opacity: 1; 
         }
 
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
+        /* 하단 고정 버튼 */
+        .fixed-footer { 
+            position: fixed; bottom: 0; width: 100%; z-index: 1000; 
+            background: rgba(0,0,0,0.9); padding: 15px 0; 
+            display: flex; justify-content: center; gap: 10px; 
+        }
+        .btn { 
+            background-color: var(--accent-color); color: black; font-weight: bold; 
+            padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; 
+        }
     </style>
 </head>
 <body>
 
     <section>
-        <img src="alpha_recruit.png" alt="메인">
-        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-btn"></a>
+        <img src="alpha_recruit.png" alt="메인 이미지">
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-btn-link"></a>
     </section>
 
     <section>
@@ -51,7 +66,7 @@
     <section>
         <div class="content-box">
             <div class="section-label">현장 & 교육 현장</div>
-            <div class="swiper fSwiper">
+            <div class="swiper fieldSwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="3.png"></div>
                     <div class="swiper-slide"><img src="4.png"></div>
@@ -64,22 +79,9 @@
         </div>
     </section>
 
-    <section>
-        <div class="content-box">
-            <div class="section-label">AI 기반 상담가이드북 일부</div>
-            <div class="swiper gSwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="10.png"></div>
-                    <div class="swiper-slide"><img src="11.png"></div>
-                    <div class="swiper-slide"><img src="12.png"></div>
-                    <div class="swiper-slide"><img src="13.png"></div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
+    <section style="padding-bottom:100px;">
+        <img src="15.png">
     </section>
-
-    <section style="padding-bottom:100px;"><img src="15.png"></section>
 
     <div class="fixed-footer">
         <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
@@ -88,18 +90,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 현장 및 교육 스와이프 설정
-        new Swiper(".fSwiper", {
-            loop: true,
-            autoplay: { delay: 3000, disableOnInteraction: false },
-            pagination: { el: ".swiper-pagination", clickable: true },
-        });
-
-        // 가이드북 스와이프 설정
-        new Swiper(".gSwiper", {
-            loop: true,
-            autoplay: { delay: 3500, disableOnInteraction: false },
-            pagination: { el: ".swiper-pagination", clickable: true },
+        document.addEventListener('DOMContentLoaded', function () {
+            const swiper = new Swiper(".fieldSwiper", {
+                loop: true, // 무한 반복
+                centeredSlides: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false, // 손으로 넘겨도 자동재생 유지
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true, // 점 클릭 시 이동 가능
+                },
+            });
         });
     </script>
 </body>
