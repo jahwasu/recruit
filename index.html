@@ -11,7 +11,7 @@
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
 
-        /* 공통 스와이프 박스 스타일 */
+        /* 박스 내 스와이프를 위한 틀 스타일 */
         .content-box { 
             width: 90%; 
             margin: 20px auto; 
@@ -22,9 +22,9 @@
         }
         .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
         
-        /* 스와이퍼 크기 조절 */
+        /* 스와이퍼 스타일 */
         .swiper { width: 100%; height: auto; }
-        .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
+        .swiper-pagination-bullet-active { background: var(--accent-color) !important; }
 
         /* 하단 고정 버튼 */
         .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
@@ -33,10 +33,16 @@
 </head>
 <body>
 
-    <section><img src="Alpha_Recruit.jpg"></section>
+    <section>
+        <img src="alpha_recruit.png" alt="메인 이미지">
+    </section>
 
     <section style="padding: 10px 0;">
-        <img src="2.png"><img src="3.png">
+        <img src="2.png">
+        <img src="3.png">
+        <img src="5.png">
+        <img src="8.png">
+        <img src="9.png">
     </section>
 
     <section>
@@ -44,9 +50,10 @@
             <div class="section-label">AI 기반 상담가이드북 일부</div>
             <div class="swiper guideSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="10.png"></div>
-                    <div class="swiper-slide"><img src="11.png"></div>
-                    <div class="swiper-slide"><img src="5.png"></div>
+                    <div class="swiper-slide"><img src="10.jpg"></div>
+                    <div class="swiper-slide"><img src="11.jpg"></div>
+                    <div class="swiper-slide"><img src="12.jpg"></div>
+                    <div class="swiper-slide"><img src="13.jpg"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -67,27 +74,29 @@
         </div>
     </section>
 
-    <section style="padding-bottom:100px;"><img src="15.png"></section>
+    <section style="padding-bottom:100px;">
+        <img src="15.png">
+    </section>
 
     <div class="fixed-footer">
         <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
-        <a href="https://open.kakao.com/o/sGSSodii" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // AI 가이드북 스와이프
+        // 가이드북 스와이프 설정
         new Swiper(".guideSwiper", {
             loop: true,
-            autoplay: { delay: 3500 },
-            pagination: { el: ".swiper-pagination" },
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
         });
 
-        // 현장 및 교육 스와이프
+        // 현장 교육 스와이프 설정
         new Swiper(".fieldSwiper", {
             loop: true,
-            autoplay: { delay: 3000 },
-            pagination: { el: ".swiper-pagination" },
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
         });
     </script>
 </body>
