@@ -9,40 +9,74 @@
         :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
         body { margin: 0; background-color: var(--bg-color); font-family: sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
+        
+        /* 전체 스크롤 섹션 */
         section { width: 100%; position: relative; }
-        .service-container { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .service-box { transition: transform 0.2s; cursor: pointer; }
-        .service-box:active { transform: scale(1.02); filter: brightness(1.1); }
-        .swiper { width: 100%; padding: 20px 0; }
-        .swiper-slide { display: flex; justify-content: center; }
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.8); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+
+        /* 사진 스와이프 구간 설정 */
+        .photo-section { background-color: #111; padding: 40px 0; text-align: center; }
+        .section-title { margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; }
+        
+        .swiper { width: 100%; padding-bottom: 30px; }
+        .swiper-slide { display: flex; justify-content: center; align-items: center; }
+        .swiper-slide img { 
+            width: 90%; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
+        }
+
+        /* 하단 고정 버튼 */
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.85); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
         .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
     </style>
 </head>
 <body>
+
     <section><img src="Alpha_Recruit.jpg"></section>
-    <section>
-        <div class="service-container">
-            <div class="service-box"><img src="2.png"></div>
-            <div class="service-box"><img src="3.png"></div>
-            <div class="service-box"><img src="5.png"></div>
-            <div class="service-box"><img src="8.png"></div>
-            <div class="service-box"><img src="9.png"></div>
+
+    <section style="padding: 20px;">
+        <img src="2.png" style="margin-bottom:15px;">
+        <img src="3.png" style="margin-bottom:15px;">
+        <img src="5.png" style="margin-bottom:15px;">
+        <img src="8.png" style="margin-bottom:15px;">
+        <img src="9.png" style="margin-bottom:15px;">
+    </section>
+
+    <section class="photo-section">
+        <div class="section-title">현장 & 교육</div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="4.png"></div>
+                <div class="swiper-slide"><img src="6.png"></div>
+                <div class="swiper-slide"><img src="7.png"></div>
+                <div class="swiper-slide"><img src="10.png"></div> <div class="swiper-slide"><img src="11.png"></div> </div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
-    <section class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="4.png" style="width:90%; border-radius:15px;"></div>
-            <div class="swiper-slide"><img src="6.png" style="width:90%; border-radius:15px;"></div>
-            <div class="swiper-slide"><img src="7.png" style="width:90%; border-radius:15px;"></div>
-        </div>
-    </section>
+
     <section style="padding-bottom:100px;"><img src="15.png"></section>
+
     <div class="fixed-footer">
         <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
         <a href="https://open.kakao.com/o/sGSSodii" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>var swiper = new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });</script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "slide",
+            loop: true, // 무한 반복
+            centeredSlides: true,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 3000, // 3초마다 자동 전환
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
 </body>
 </html>
