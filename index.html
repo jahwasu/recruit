@@ -10,23 +10,10 @@
         body { margin: 0; background-color: var(--bg-color); font-family: sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
-
-        /* 박스 내 스와이프를 위한 틀 스타일 */
-        .content-box { 
-            width: 90%; 
-            margin: 20px auto; 
-            background: #2A2A2A; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .content-box { width: 92%; margin: 20px auto; background: #2A2A2A; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
-        
-        /* 스와이퍼 스타일 */
         .swiper { width: 100%; height: auto; }
         .swiper-pagination-bullet-active { background: var(--accent-color) !important; }
-
-        /* 하단 고정 버튼 */
         .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
         .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
     </style>
@@ -34,10 +21,10 @@
 <body>
 
     <section>
-        <img src="alpha_recruit.png" alt="메인 이미지">
+        <img src="alpha_recruit.png" alt="메인 이미지 (업로드 확인 필요)">
     </section>
 
-    <section style="padding: 10px 0;">
+    <section>
         <img src="2.png">
         <img src="3.png">
         <img src="5.png">
@@ -50,10 +37,9 @@
             <div class="section-label">AI 기반 상담가이드북 일부</div>
             <div class="swiper guideSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="10.jpg"></div>
-                    <div class="swiper-slide"><img src="11.jpg"></div>
-                    <div class="swiper-slide"><img src="12.jpg"></div>
-                    <div class="swiper-slide"><img src="13.jpg"></div>
+                    <div class="swiper-slide"><img src="10.png"></div>
+                    <div class="swiper-slide"><img src="11.png"></div>
+                    <div class="swiper-slide"><img src="12.png"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -85,19 +71,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 가이드북 스와이프 설정
-        new Swiper(".guideSwiper", {
-            loop: true,
-            autoplay: { delay: 3500, disableOnInteraction: false },
-            pagination: { el: ".swiper-pagination", clickable: true },
-        });
-
-        // 현장 교육 스와이프 설정
-        new Swiper(".fieldSwiper", {
-            loop: true,
-            autoplay: { delay: 3000, disableOnInteraction: false },
-            pagination: { el: ".swiper-pagination", clickable: true },
-        });
+        new Swiper(".guideSwiper", { loop: true, autoplay: { delay: 3500 }, pagination: { el: ".swiper-pagination" } });
+        new Swiper(".fieldSwiper", { loop: true, autoplay: { delay: 3000 }, pagination: { el: ".swiper-pagination" } });
     </script>
 </body>
 </html>
