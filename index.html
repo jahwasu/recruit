@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>연금 전문가 모집 - 알파본부</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #1F1F1F; color: white; }
+        
+        /* [수정] 배경 이미지를 main.jpg로 변경 및 화면 최적화 */
+        .main-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-image: url("main.jpg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 25px;
+        }
+
+        .badge-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; align-items: center; }
+        .badge {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .title { font-size: 30px; text-align: center; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.02em; }
+        .subtitle { font-size: 16px; font-weight: 400; color: rgba(255, 255, 255, 0.9); text-align: center; margin-bottom: 40px; line-height: 1.6; }
+
+        .btn-primary {
+            background-color: #FFD700;
+            color: #1a1a1a;
+            padding: 16px 45px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-primary:hover { background-color: #FFC700; transform: translateY(-2px); }
+
+        .footnote {
+            position: absolute;
+            bottom: 30px; left: 25px; right: 25px;
+            z-index: 2;
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* 연락처 모달 스타일 */
+        .modal-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000; justify-content: center; align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background-color: white; border-radius: 20px;
+            padding: 40px 30px; width: 90%; max-width: 380px;
+            position: relative; color: #1a1a1a; text-align: center;
+        }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 24px; color: #999; cursor: pointer; }
+        .modal-phone { font-size: 28px; font-weight: 700; margin: 15px 0 5px; letter-spacing: 1px; }
+        .modal-btn-kakao {
+            background-color: #FEE500; color: #000;
+            width: 100%; padding: 14px; border-radius: 10px;
+            font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: 20px; text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="overlay"></div>
+    
+    <div class="content-wrapper">
+        <div class="badge-container">
+            <div class="badge">B2B 파트너십</div>
+            <div class="badge">사업장별 상담센터 운용</div>
+        </div>
+
+        <h1 class="title">
+            <span style="font-weight:400;">코스피 7000시대,</span><br>
+            <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br>
+            <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
+        </h1>
+
+        <div class="subtitle">
+            연금전문 알파본부는<br/>고객사 임직원의 자산관리 여정을 지원합니다.
+        </div>
+
+        <button class="btn-primary" onclick="openModal()">
+            <i class="fas fa-user-plus"></i> 입사문의
+        </button>
+    </div>
+
+    <div class="footnote">
+        * 굿리치 알파본부는 국내 굴지의 대기업 임직원을 대상으로 수년간 자산관리 교육/1:1재무상담/법률자문 서비스 업무를 수행하고 있습니다.
+    </div>
+</div>
+
+<div class="modal-overlay" id="contactModal" onclick="if(event.target==this) closeModal()">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2 style="font-size:22px; font-weight:700;">입사문의</h2>
+        <div style="color:#FFD700; font-size:40px; margin-top:20px;"><i class="fas fa-phone-alt"></i></div>
+        <div class="modal-phone">010-3732-9326</div>
+        <div style="color:#666; margin-bottom:20px;">담당: 김재현 본부장</div>
+        
+        <a href="tel:010-3732-9326" class="btn-primary" style="width:100%; justify-content:center;">전화 연결하기</a>
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="modal-btn-kakao">
+            <i class="fas fa-comment"></i> 오픈채팅방 열기
+        </a>
+    </div>
+</div>
+
+<script>
+    function openModal() { document.getElementById('contactModal').classList.add('active'); }
+    function closeModal() { document.getElementById('contactModal').classList.remove('active'); }
+</script>
+
+</body>
+</html>
