@@ -23,113 +23,122 @@
         .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 25px; }
         .hero-badge {
             background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
-            padding: 6px 16px; border-radius: 20px; font-size: 13px; margin-bottom: 10px; display: inline-block;
+            padding: 6px 16px; border-radius: 20px; font-size: 13px; margin-bottom: 15px; display: inline-block;
         }
-        .hero-title { font-size: 30px; line-height: 1.4; margin-bottom: 20px; }
-        .btn-recruit { background: var(--accent-color); color: #1a1a1a; padding: 16px 45px; border-radius: 12px; font-weight: 700; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; }
+        .hero-title { font-size: 32px; line-height: 1.4; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .hero-subtitle { font-size: 16px; color: rgba(255,255,255,0.9); margin-bottom: 40px; line-height: 1.6; }
+        .btn-recruit { background: var(--accent-color); color: #1a1a1a; padding: 16px 45px; border-radius: 12px; font-weight: 700; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+        .hero-footnote { position: absolute; bottom: 30px; left: 25px; right: 25px; z-index: 2; font-size: 13px; opacity: 0.8; text-align: left; line-height: 1.5; }
 
-        /* [2페이지] 젠스파크 6가지 특화 서비스 */
+        /* [2페이지] 6가지 특화 서비스 */
         .feature-section { padding: 60px 20px; background-color: var(--bg-color); }
         .feature-header { text-align: center; margin-bottom: 35px; }
+        .feature-title { font-size: 24px; font-weight: 900; color: #ffffff; line-height: 1.3; }
+        
+        .cards-list { display: flex; flex-direction: column; gap: 15px; }
         .feature-card {
-            background-color: white; border-radius: 15px; padding: 22px; 
-            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;
+            background-color: white; border-radius: 12px; padding: 20px; 
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .feature-card:active { transform: scale(0.97); }
         .icon-box { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
         
-        /* 아이콘 색상 정의 */
         .icon-1 { background-color: #3b82f6; } .icon-2 { background-color: #10b981; }
         .icon-3 { background-color: #f59e0b; } .icon-4 { background-color: #8b5cf6; }
         .icon-5 { background-color: #ef4444; } .icon-6 { background-color: #06b6d4; }
 
-        .card-content { flex: 1; text-align: left; }
-        .card-title { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
-        .card-desc { font-size: 14px; color: #666; line-height: 1.4; }
+        .card-content { flex: 1; text-align: left; display: flex; flex-direction: column; gap: 4px; }
+        .card-title { font-size: 18px; font-weight: 700; color: #1a1a1a; line-height: 1.3; }
+        .card-desc { font-size: 15px; font-weight: 400; color: #666; line-height: 1.4; }
+        .parenthesis-text { font-size: 11px; font-weight: 400; vertical-align: middle; }
 
-        /* 하단 고정 바 및 모달 */
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.92); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .footer-btn { padding: 12px 22px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 14px; color: #000; background: var(--accent-color); }
-        
+        /* 모달 스타일 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
         .modal-overlay.active { display: flex; }
         .modal-content { background: white; border-radius: 20px; padding: 40px 30px; width: 90%; max-width: 380px; text-align: center; color: #1a1a1a; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 24px; color: #999; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <section class="hero-section">
+        <div class="overlay"></div>
         <div class="hero-content">
             <div class="hero-badge">B2B 파트너십</div>
+            <div class="hero-badge">사업장별 상담센터 운용</div>
             <h1 class="hero-title">
                 <span style="font-weight:400;">코스피 7000시대,</span><br>
                 <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br>
                 <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
             </h1>
-            <button class="btn-recruit" onclick="openModal()">입사문의</button>
+            <p class="hero-subtitle">연금전문 알파본부는 고객사<sup>*</sup> 임직원의<br>자산관리 여정을 지원합니다.</p>
+            <button class="btn-recruit" onclick="openModal()">
+                <i class="fas fa-user-plus"></i> 입사문의
+            </button>
+        </div>
+        <div class="hero-footnote">
+            * 굿리치 알파본부는 국내 굴지의 대기업 임직원을 대상으로 수년간 자산관리 교육/1:1재무상담/법률자문 서비스 업무를 수행하고 있습니다. [2024.3 ~ ]
         </div>
     </section>
 
     <div class="feature-section">
         <div class="feature-header">
-            <h2 style="font-size: 24px; font-weight: 900;">고객사 임직원을 위한<br>6가지 특화 서비스</h2>
+            <h2 class="feature-title">고객사 임직원을 위한<br>6가지 특화 서비스</h2>
         </div>
-        <div class="feature-card">
-            <div class="icon-box icon-1"><i class="fas fa-building"></i></div>
-            <div class="card-content">
-                <div class="card-title">사업장별 상담센터 운영</div>
-                <div class="card-description">임직원 밀착형 상담 인프라</div>
+        <div class="cards-list">
+            <div class="feature-card">
+                <div class="icon-box icon-1"><i class="fas fa-building"></i></div>
+                <div class="card-content">
+                    <div class="card-title">사업장별 상담센터 운영</div>
+                    <div class="card-desc">임직원 접근성을 극대화한 밀착형 상담 인프라를 갖추고 있습니다.</div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box icon-2"><i class="fas fa-chart-line"></i></div>
+                <div class="card-content">
+                    <div class="card-title">연간 임직원 교육 155회 <span class="parenthesis-text">('25년 기준)</span></div>
+                    <div class="card-desc">전체 임직원을 대상으로 1.5Hr 체계적인 교육을 통해 재무 역량을 높입니다.</div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box icon-3"><i class="fas fa-graduation-cap"></i></div>
+                <div class="card-content">
+                    <div class="card-title">신입사원 자산관리 첫걸음 교육 4회 <span class="parenthesis-text">('25년 기준)</span></div>
+                    <div class="card-desc">신입사원 연수과정에 함께하여 건전한 자산증식의 첫걸음을 돕고 있습니다.</div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box icon-4"><i class="fas fa-piggy-bank"></i></div>
+                <div class="card-content">
+                    <div class="card-title">우리사주조합 전국사업장 세미나 수행</div>
+                    <div class="card-desc">전국 사업장 방문 부부동반 세미나를 통해 가족 단위 재무설계를 지원합니다.</div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box icon-5"><i class="fas fa-robot"></i></div>
+                <div class="card-content">
+                    <div class="card-title">AI 상담 가이드북 <span class="parenthesis-text">(Web 기반)</span></div>
+                    <div class="card-desc">자체 개발한 AI Consulting Tool로 전문적인 자산관리 상담을 실현합니다.</div>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box icon-6"><i class="fas fa-handshake"></i></div>
+                <div class="card-content">
+                    <div class="card-title">자산관리 전문가 양성 프로그램</div>
+                    <div class="card-desc">매주 Case Study로 실전 사례 기반의 은퇴/연금설계 솔루션을 발전시킵니다.</div>
+                </div>
             </div>
         </div>
-        <div class="feature-card">
-            <div class="icon-box icon-2"><i class="fas fa-chart-line"></i></div>
-            <div class="card-content">
-                <div class="card-title">연간 임직원 교육 155회</div>
-                <div class="card-description">재무 역량을 높이는 체계적인 맞춤 교육</div>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box icon-3"><i class="fas fa-graduation-cap"></i></div>
-            <div class="card-content">
-                <div class="card-title">신입사원 첫걸음 교육 4회</div>
-                <div class="card-description">건전한 자산증식의 올바른 시작 가이드</div>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box icon-4"><i class="fas fa-piggy-bank"></i></div>
-            <div class="card-content">
-                <div class="card-title">전국 사업장 세미나 수행</div>
-                <div class="card-description">전국 방문 부부동반 재무설계 지원</div>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box icon-5"><i class="fas fa-robot"></i></div>
-            <div class="card-content">
-                <div class="card-title">AI 상담 가이드북</div>
-                <div class="card-description">자체 개발 Tool을 통한 전문 상담 실현</div>
-            </div>
-        </div>
-        <div class="feature-card">
-            <div class="icon-box icon-6"><i class="fas fa-handshake"></i></div>
-            <div class="card-content">
-                <div class="card-title">전문가 양성 프로그램</div>
-                <div class="card-description">실전 사례 기반의 은퇴/연금 솔루션</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed-footer">
-        <a href="tel:01037329326" class="footer-btn">📞 전화문의</a>
-        <a href="javascript:openModal()" class="footer-btn" style="background:#FEE500;">💬 상담신청</a>
     </div>
 
     <div class="modal-overlay" id="contactModal" onclick="if(event.target==this) closeModal()">
         <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
             <h2 style="font-size:22px; font-weight:700;">입사문의</h2>
             <div style="color:#FFD700; font-size:40px; margin-top:20px;"><i class="fas fa-phone-alt"></i></div>
             <div style="font-size:28px; font-weight:900; margin-top:10px;">010-3732-9326</div>
             <div style="color:#666; margin-bottom:25px;">담당: 김재현 본부장</div>
+            <a href="tel:010-3732-9326" class="btn-recruit" style="width:100%; justify-content:center; margin-bottom:10px; background-color: #FFD700;">전화 연결하기</a>
             <a href="https://open.kakao.com/o/sGSSodii" target="_blank" style="background:#FEE500; display:block; padding:15px; border-radius:10px; font-weight:800; text-decoration:none; color:black;">💬 오픈채팅방 열기</a>
         </div>
     </div>
