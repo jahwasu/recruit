@@ -8,76 +8,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
+        :root { --bg-color: #1A1A1A; --accent-color: #FFD700; }
         body { margin: 0; background-color: var(--bg-color); font-family: 'Noto Sans KR', sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
         
-        /* 1페이지 메인 (젠스파크 디자인) */
-        .main-container {
-            height: 100vh; position: relative; display: flex; flex-direction: column;
-            background-image: url("alpha_recruit.png"); background-size: cover; background-position: center;
+        /* [해결] 1페이지 메인: 글자 겹침 방지 레이아웃 */
+        .main-hero {
+            height: 100vh; width: 100%; position: relative; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("alpha_recruit.png");
+            background-size: cover; background-position: center; text-align: center;
         }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.65); z-index: 1; }
-        .main-content { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 20px; text-align: center; }
+        .hero-badges { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .hero-badge { background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; }
         
-        .badge-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 25px; }
-        .badge { background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 12px; }
-        
-        .main-title { font-size: 28px; line-height: 1.4; margin-bottom: 15px; letter-spacing: -0.5px; }
-        .main-subtitle { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 35px; line-height: 1.5; }
-        
-        .btn-main { background: var(--accent-color); color: #000; padding: 15px 35px; border-radius: 10px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 17px; }
+        .hero-title { font-size: 30px; line-height: 1.4; margin: 0 0 20px 0; letter-spacing: -0.5px; }
+        .hero-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); margin: 0 0 35px 0; line-height: 1.6; }
+        .btn-recruit { background: var(--accent-color); color: #000; padding: 16px 45px; border-radius: 12px; font-weight: 800; border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
 
-        /* 2페이지 카드 섹션 */
-        .feature-section { padding: 60px 20px; }
-        .feature-card { background: white; color: #333; border-radius: 12px; padding: 20px; display: flex; gap: 15px; margin-bottom: 15px; align-items: center; }
-        .icon-box { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
-        .card-info h3 { margin: 0 0 5px 0; font-size: 17px; color: #111; }
-        .card-info p { margin: 0; font-size: 14px; color: #666; line-height: 1.4; }
+        .hero-footnote { position: absolute; bottom: 30px; width: 100%; padding: 0 20px; box-sizing: border-box; font-size: 13px; opacity: 0.7; text-align: left; }
 
-        /* 3페이지 슬라이드 */
-        .slide-frame { width: 92%; margin: 30px auto; background: #262626; border-radius: 20px; padding: 25px 0; text-align: center; }
-        .swiper { width: 90%; border-radius: 12px; margin-top: 20px; }
-        .swiper-pagination-bullet-active { width: 25px !important; border-radius: 5px !important; background: white !important; }
+        /* 2페이지: 젠스파크 스타일 6가지 카드 */
+        .feature-wrap { padding: 60px 20px; background: #1F1F1F; }
+        .feature-title { text-align: center; font-size: 24px; font-weight: 900; margin-bottom: 35px; }
+        .feature-card { background: white; color: #222; border-radius: 16px; padding: 22px; display: flex; gap: 18px; margin-bottom: 15px; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .icon-circle { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; font-size: 20px; }
 
-        /* 모달 팝업 */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
-        .modal.active { display: flex; }
-        .modal-body { background: white; color: #222; width: 85%; max-width: 350px; border-radius: 15px; padding: 30px; text-align: center; position: relative; }
+        /* 3페이지: 현장 슬라이드 */
+        .slide-frame { width: 92%; margin: 20px auto 60px; background: #262626; border-radius: 25px; padding: 30px 0; text-align: center; }
+        .swiper { width: 90%; border-radius: 15px; margin-top: 25px; }
+        .swiper-pagination-bullet { background: #555; opacity: 1; }
+        .swiper-pagination-bullet-active { width: 28px !important; border-radius: 5px !important; background: white !important; }
+
+        /* 하단 고정 바 및 모달 */
+        .footer-nav { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.92); padding: 15px 0; display: flex; justify-content: center; gap: 10px; border-top: 1px solid #333; }
+        .footer-btn { padding: 12px 25px; border-radius: 30px; font-weight: 800; text-decoration: none; font-size: 15px; color: #000; background: var(--accent-color); }
         
-        /* 고정 하단 바 */
-        .footer-bar { position: fixed; bottom: 0; width: 100%; z-index: 500; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .footer-btn { padding: 10px 20px; border-radius: 25px; font-weight: 700; text-decoration: none; font-size: 14px; color: #000; background: var(--accent-color); }
+        .modal-wrap { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-wrap.active { display: flex; }
+        .modal-inner { background: white; color: #111; width: 88%; max-width: 360px; border-radius: 20px; padding: 35px; text-align: center; position: relative; }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="overlay"></div>
-        <div class="main-content">
-            <div class="badge-container">
-                <div class="badge">B2B 파트너십</div>
-                <div class="badge">사업장별 상담센터 운용</div>
-            </div>
-            <h1 class="main-title">코스피 7000시대,<br><b>머니무브의 큰 물결</b>을 이끌<br><b>연금 전문가</b>를 모십니다.</h1>
-            <p class="main-subtitle">연금전문 알파본부는 고객사 임직원의<br>자산관리 여정을 함께합니다.</p>
-            <button class="btn-main" onclick="toggleModal(true)"><i class="fas fa-user-plus"></i> 입사문의</button>
+    <div class="main-hero">
+        <div class="hero-badges">
+            <div class="hero-badge">B2B 파트너십</div>
+            <div class="hero-badge">사업장별 상담센터 운용</div>
         </div>
+        <h1 class="hero-title"><span style="font-weight:400;">코스피 7000시대,</span><br><b>머니무브의 큰 물결</b>을 이끌<br><b>연금 전문가</b>를 모십니다.</h1>
+        <p class="hero-subtitle">연금전문 알파본부는 고객사 임직원의<br>자산관리 여정을 함께합니다.</p>
+        <button class="btn-recruit" onclick="toggleModal(true)"><i class="fas fa-user-plus"></i> 입사문의</button>
+        <div class="hero-footnote">* 굿리치 알파본부는 대기업 임직원 대상 자산관리 교육 및 재무상담 서비스를 수행하고 있습니다.</div>
     </div>
 
-    <div class="feature-section">
-        <h2 style="text-align:center; margin-bottom:30px;">6가지 특화 서비스</h2>
-        <div class="feature-card"><div class="icon-box" style="background:#3b82f6;"><i class="fas fa-building"></i></div><div class="card-info"><h3>상담센터 운영</h3><p>사업장별 밀착형 상담 인프라</p></div></div>
-        <div class="feature-card"><div class="icon-box" style="background:#10b981;"><i class="fas fa-chart-line"></i></div><div class="card-info"><h3>연간 교육 155회</h3><p>체계적인 재무 역량 강화 교육</p></div></div>
-        <div class="feature-card"><div class="icon-box" style="background:#f59e0b;"><i class="fas fa-graduation-cap"></i></div><div class="card-info"><h3>신입사원 교육</h3><p>건전한 자산증식 가이드 제공</p></div></div>
-        <div class="feature-card"><div class="icon-box" style="background:#8b5cf6;"><i class="fas fa-piggy-bank"></i></div><div class="card-info"><h3>전국 세미나</h3><p>전국 방문 부부동반 재무설계</p></div></div>
-        <div class="feature-card"><div class="icon-box" style="background:#ef4444;"><i class="fas fa-robot"></i></div><div class="card-info"><h3>AI 상담 가이드</h3><p>자체 개발 Tool 전문 상담 실현</p></div></div>
-        <div class="feature-card"><div class="icon-box" style="background:#06b6d4;"><i class="fas fa-handshake"></i></div><div class="card-info"><h3>전문가 양성</h3><p>실전 사례 기반 은퇴 솔루션</p></div></div>
+    <div class="feature-wrap">
+        <div class="feature-title">고객사 임직원을 위한<br>6가지 특화 서비스</div>
+        <div class="feature-card"><div class="icon-circle" style="background:#3b82f6;"><i class="fas fa-building"></i></div><div style="flex:1;"><b>상담센터 운영</b><p style="margin:4px 0 0; font-size:14px; color:#666;">사업장별 밀착형 상담 인프라</p></div></div>
+        <div class="feature-card"><div class="icon-circle" style="background:#10b981;"><i class="fas fa-chart-line"></i></div><div style="flex:1;"><b>연간 교육 155회</b><p style="margin:4px 0 0; font-size:14px; color:#666;">재무 역량을 높이는 맞춤형 교육</p></div></div>
+        <div class="feature-card"><div class="icon-circle" style="background:#f59e0b;"><i class="fas fa-graduation-cap"></i></div><div style="flex:1;"><b>신입사원 교육</b><p style="margin:4px 0 0; font-size:14px; color:#666;">건전한 자산증식 가이드 제공</p></div></div>
+        <div class="feature-card"><div class="icon-circle" style="background:#8b5cf6;"><i class="fas fa-piggy-bank"></i></div><div style="flex:1;"><b>전국 세미나 수행</b><p style="margin:4px 0 0; font-size:14px; color:#666;">전국 방문 부부동반 재무설계</p></div></div>
+        <div class="feature-card"><div class="icon-circle" style="background:#ef4444;"><i class="fas fa-robot"></i></div><div style="flex:1;"><b>AI 상담 가이드북</b><p style="margin:4px 0 0; font-size:14px; color:#666;">자체 개발 Tool을 통한 전문 상담</p></div></div>
+        <div class="feature-card"><div class="icon-circle" style="background:#06b6d4;"><i class="fas fa-handshake"></i></div><div style="flex:1;"><b>전문가 양성 프로그램</b><p style="margin:4px 0 0; font-size:14px; color:#666;">실사례 기반의 은퇴 솔루션</p></div></div>
     </div>
 
     <div class="slide-frame">
-        <h3>현장 & 교육</h3>
-        <p style="color:#aaa; font-size:14px;">생생한 자산관리 교육 현장</p>
+        <h2 style="margin:0; font-size:26px;">현장 & 교육</h2>
+        <p style="color:#cbd5e0; margin:5px 0 0;">알파본부의 생생한 교육 현장</p>
         <div class="swiper fSwiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="신입사원집체교육_일반직.jpg"></div>
@@ -86,30 +83,32 @@
                 <div class="swiper-slide"><img src="조합원교육광명.jpg"></div>
                 <div class="swiper-slide"><img src="부부동반세미나_2.jpg"></div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" style="position:relative; margin-top:20px;"></div>
         </div>
     </div>
 
-    <div style="padding-bottom:100px;"><img src="15.png"></div>
+    <div style="padding-bottom:120px;"><img src="15.png"></div>
 
-    <div class="footer-bar">
+    <div class="footer-nav">
         <a href="tel:01037329326" class="footer-btn">📞 전화문의</a>
         <a href="javascript:toggleModal(true)" class="footer-btn" style="background:#FEE500;">💬 상담신청</a>
     </div>
 
-    <div id="contactModal" class="modal" onclick="if(event.target==this) toggleModal(false)">
-        <div class="modal-body">
-            <h2 style="margin-top:0;">입사문의</h2>
-            <p style="font-size:24px; font-weight:700; margin:20px 0;">010-3732-9326</p>
-            <p style="color:#666;">담당: 김재현 본부장</p>
-            <a href="https://open.kakao.com/o/sGSSodii" target="_blank" style="display:block; background:#FEE500; padding:12px; border-radius:8px; text-decoration:none; color:#000; font-weight:700; margin-top:20px;">카카오톡 오픈채팅방</a>
+    <div id="contactModal" class="modal-wrap" onclick="if(event.target==this) toggleModal(false)">
+        <div class="modal-inner">
+            <div onclick="toggleModal(false)" style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:20px;"><i class="fas fa-times"></i></div>
+            <h2 style="margin:0 0 25px 0;">입사문의</h2>
+            <div style="color:#FFD700; font-size:40px; margin-bottom:15px;"><i class="fas fa-phone-alt"></i></div>
+            <div style="font-size:28px; font-weight:900; margin-bottom:5px;">010-3732-9326</div>
+            <div style="color:#666; margin-bottom:25px;">담당: 김재현 본부장</div>
+            <a href="https://open.kakao.com/o/sGSSodii" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:10px; background:#FEE500; padding:15px; border-radius:10px; text-decoration:none; color:#000; font-weight:800;">💬 카카오톡 오픈채팅방</a>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         new Swiper(".fSwiper", { loop: true, autoplay: { delay: 3000 }, pagination: { el: ".swiper-pagination", clickable: true } });
-        function toggleModal(show) { document.getElementById('contactModal').style.display = show ? 'flex' : 'none'; }
+        function toggleModal(show) { document.getElementById('contactModal').classList.toggle('active', show); }
     </script>
 </body>
 </html>
