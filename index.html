@@ -6,77 +6,91 @@
     <title>알파본부 리크루팅</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
         body { margin: 0; background-color: var(--bg-color); font-family: 'Noto Sans KR', sans-serif; color: white; overflow-x: hidden; }
         img { width: 100%; display: block; }
-        section { width: 100%; position: relative; padding: 20px 0; }
-        
-        /* 1페이지 메인 투명 클릭 영역 */
-        .main-btn-link { position: absolute; top: 64%; left: 30%; width: 40%; height: 8%; cursor: pointer; z-index: 10; }
+        section { width: 100%; position: relative; }
 
-        /* [젠스파크 스타일] 6가지 특화 서비스 카드 레이아웃 */
-        .feature-section { padding: 40px 20px; background-color: #1F1F1F; }
+        /* [젠스파크 스타일] 1페이지 메인 */
+        .main-container {
+            height: 100vh; position: relative; display: flex; flex-direction: column;
+            background-image: url("alpha_recruit.png"); background-size: cover; background-position: center;
+        }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
+        .main-content { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 30px; }
+        
+        .badge-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; align-items: center; }
+        .badge { background-color: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 6px 16px; border-radius: 16px; font-size: 12px; font-weight: 500; color: white; }
+        
+        .main-title { font-size: 32px; color: white; text-align: center; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.02em; }
+        .main-subtitle { font-size: 16px; font-weight: 400; color: rgba(255, 255, 255, 0.9); text-align: center; margin-bottom: 40px; line-height: 1.6; }
+        
+        /* 입사문의 메인 버튼 */
+        .btn-main { padding: 16px 40px; border-radius: 8px; font-size: 18px; font-weight: 700; background-color: var(--accent-color); color: #1a1a1a; border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4); }
+
+        .main-footnote { position: absolute; bottom: 30px; left: 30px; right: 30px; z-index: 2; font-size: 13px; opacity: 0.8; text-align: left; }
+
+        /* [젠스파크 스타일] 2페이지 특화 서비스 */
+        .feature-section { padding: 60px 20px; background-color: #1F1F1F; }
         .feature-header { text-align: center; margin-bottom: 30px; }
-        .feature-title { font-size: 24px; font-weight: 900; color: #ffffff; line-height: 1.3; }
-        
+        .feature-title { font-size: 24px; font-weight: 900; line-height: 1.3; }
         .cards-list { display: flex; flex-direction: column; gap: 15px; }
-        .feature-card { 
-            background-color: white; border-radius: 12px; padding: 20px; 
-            display: flex; align-items: center; gap: 15px; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: transform 0.2s;
-        }
-        .feature-card:active { transform: scale(0.97); background-color: #f8f8f8; }
-
-        .icon-wrapper { 
-            width: 48px; height: 48px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
-        }
-        .icon-wrapper i { font-size: 20px; color: white; }
-        /* 아이콘별 고유 색상 */
-        .icon-1 { background-color: #3b82f6; } .icon-2 { background-color: #10b981; }
-        .icon-3 { background-color: #f59e0b; } .icon-4 { background-color: #8b5cf6; }
-        .icon-5 { background-color: #ef4444; } .icon-6 { background-color: #06b6d4; }
-
+        .feature-card { background-color: white; border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+        .icon-wrapper { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
+        .icon-1 { background-color: #3b82f6; } .icon-2 { background-color: #10b981; } .icon-3 { background-color: #f59e0b; }
+        .icon-4 { background-color: #8b5cf6; } .icon-5 { background-color: #ef4444; } .icon-6 { background-color: #06b6d4; }
         .card-content { flex: 1; text-align: left; }
         .card-title { font-size: 17px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
         .card-description { font-size: 14px; color: #666; line-height: 1.4; }
-        .parenthesis-text { font-size: 11px; opacity: 0.7; font-weight: 400; }
 
-        /* [젠스파크 스타일] 현장 & 교육 프레임 */
-        .frame-container { 
-            width: 92%; margin: 10px auto; background: #262626; border-radius: 20px; 
-            padding: 30px 0 15px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center;
-        }
+        /* [젠스파크 스타일] 3페이지 현장 & 교육 */
+        .frame-container { width: 92%; margin: 40px auto; background: #262626; border-radius: 20px; padding: 30px 0 15px 0; text-align: center; }
         .section-title { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
         .section-subtitle { font-size: 15px; color: #cbd5e0; margin-bottom: 25px; }
-
-        /* 스와이프 및 인디케이터 */
         .swiper { width: 90%; border-radius: 12px; overflow: hidden; }
-        .swiper-pagination { position: relative !important; margin-top: 20px !important; bottom: 0 !important; }
-        .swiper-pagination-bullet { width: 8px; height: 8px; background: rgba(255,255,255,0.3); opacity: 1; }
-        .swiper-pagination-bullet-active { width: 24px; border-radius: 4px; background: #fff !important; }
+        .swiper-pagination-bullet-active { width: 24px !important; border-radius: 4px !important; background: #fff !important; }
 
-        /* 확대 모달 */
-        .modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; flex-direction: column;
-        }
-        .modal.active { display: flex; }
-        .modal-img { max-width: 90%; max-height: 70%; object-fit: contain; }
+        /* 하단 고정 바 */
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+        .btn-footer { background-color: var(--accent-color); color: black; font-weight: 700; padding: 12px 22px; border-radius: 30px; text-decoration: none; font-size: 14px; }
 
-        /* 하단 고정 버튼 */
-        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.95); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 22px; border-radius: 30px; text-decoration: none; font-size: 14px; }
+        /* [젠스파크 스타일] 연락처 모달 팝업 */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; border-radius: 16px; padding: 36px 28px; width: 90%; max-width: 380px; position: relative; color: #1a1a1a; text-align: center; }
+        .modal-close { position: absolute; top: 16px; right: 16px; font-size: 22px; color: #666; cursor: pointer; }
+        .modal-title { font-size: 24px; font-weight: 700; margin-bottom: 25px; }
+        .modal-phone { font-size: 28px; font-weight: 700; margin-bottom: 5px; letter-spacing: 1px; }
+        .modal-manager { font-size: 15px; color: #666; margin-bottom: 20px; }
+        .btn-kakao { background-color: #FEE500; width: 100%; padding: 14px; border-radius: 8px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; color: black; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-    <section style="padding:0;">
-        <img src="alpha_recruit.png">
-        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-btn-link"></a>
-    </section>
+    <div class="main-container">
+        <div class="overlay"></div>
+        <div class="main-content">
+            <div class="badge-container">
+                <div class="badge">B2B 파트너십</div>
+                <div class="badge">사업장별 상담센터 운용</div>
+            </div>
+            <h1 class="main-title">
+                <span style="font-weight:400;">코스피 7000시대,</span><br>
+                <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br>
+                <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
+            </h1>
+            <p class="main-subtitle">연금전문 알파본부는 고객사 임직원의<br>자산관리 여정을 함께합니다.</p>
+            <button class="btn-main" onclick="openContactModal()">
+                <i class="fas fa-user-plus"></i> 입사문의
+            </button>
+        </div>
+        <div class="main-footnote">
+            <p>* 굿리치 알파본부는 대기업 임직원 대상 자산관리 교육 및 재무상담 서비스를 수행하고 있습니다.</p>
+        </div>
+    </div>
 
     <div class="feature-section">
         <div class="feature-header">
@@ -87,42 +101,42 @@
                 <div class="icon-wrapper icon-1"><i class="fas fa-building"></i></div>
                 <div class="card-content">
                     <div class="card-title">사업장별 상담센터 운영</div>
-                    <div class="card-description">임직원 접근성을 극대화한 밀착형 인프라</div>
+                    <div class="card-description">임직원 밀착형 상담 인프라</div>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="icon-wrapper icon-2"><i class="fas fa-chart-line"></i></div>
                 <div class="card-content">
-                    <div class="card-title">연간 임직원 교육 155회 <span class="parenthesis-text">('25년)</span></div>
-                    <div class="card-description">재무 역량을 높이는 체계적인 맞춤 교육</div>
+                    <div class="card-title">연간 임직원 교육 155회</div>
+                    <div class="card-description">재무 역량을 높이는 체계적인 교육</div>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="icon-wrapper icon-3"><i class="fas fa-graduation-cap"></i></div>
                 <div class="card-content">
-                    <div class="card-title">신입사원 첫걸음 교육 4회 <span class="parenthesis-text">('25년)</span></div>
-                    <div class="card-description">건전한 자산증식의 올바른 가이드</div>
+                    <div class="card-title">신입사원 첫걸음 교육 4회</div>
+                    <div class="card-description">건전한 자산증식의 올바른 시작</div>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="icon-wrapper icon-4"><i class="fas fa-piggy-bank"></i></div>
                 <div class="card-content">
-                    <div class="card-title">우리사주조합 전국 세미나</div>
-                    <div class="card-description">전국 방문 부부동반 재무설계 지원</div>
+                    <div class="card-title">전국 사업장 세미나 수행</div>
+                    <div class="card-description">방문 부부동반 재무설계 지원</div>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="icon-wrapper icon-5"><i class="fas fa-robot"></i></div>
                 <div class="card-content">
-                    <div class="card-title">AI 상담 가이드북 <span class="parenthesis-text">(Web)</span></div>
-                    <div class="card-description">자체 개발 Tool을 통한 전문 상담 실현</div>
+                    <div class="card-title">AI 상담 가이드북</div>
+                    <div class="card-description">자체 개발 Tool을 통한 전문 상담</div>
                 </div>
             </div>
             <div class="feature-card">
                 <div class="icon-wrapper icon-6"><i class="fas fa-handshake"></i></div>
                 <div class="card-content">
-                    <div class="card-title">자산관리 전문가 양성</div>
-                    <div class="card-description">실전 사례 기반의 은퇴/연금 솔루션</div>
+                    <div class="card-title">전문가 양성 프로그램</div>
+                    <div class="card-description">실전 사례 기반의 은퇴 솔루션</div>
                 </div>
             </div>
         </div>
@@ -131,25 +145,14 @@
     <section>
         <div class="frame-container">
             <h1 class="section-title">현장 & 교육</h1>
-            <p class="section-subtitle">알파본부의 생생한 자산관리 교육 현장</p>
-            
+            <p class="section-subtitle">알파본부의 생생한 교육 현장</p>
             <div class="swiper fSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" onclick="openModal('신입사원집체교육_일반직.jpg', '26년 상반기 신입사원 교육')">
-                        <img src="신입사원집체교육_일반직.jpg">
-                    </div>
-                    <div class="swiper-slide" onclick="openModal('신입사원집체교육_정규직.jpg', '25년 하반기 신입사원 교육')">
-                        <img src="신입사원집체교육_정규직.jpg">
-                    </div>
-                    <div class="swiper-slide" onclick="openModal('조합원교육.jpg', '25년 임직원 교육')">
-                        <img src="조합원교육.jpg">
-                    </div>
-                    <div class="swiper-slide" onclick="openModal('조합원교육광명.jpg', '25년 임직원 교육')">
-                        <img src="조합원교육광명.jpg">
-                    </div>
-                    <div class="swiper-slide" onclick="openModal('부부동반세미나_2.jpg', '25년 부부동반 세미나')">
-                        <img src="부부동반세미나_2.jpg">
-                    </div>
+                    <div class="swiper-slide"><img src="신입사원집체교육_일반직.jpg"></div>
+                    <div class="swiper-slide"><img src="신입사원집체교육_정규직.jpg"></div>
+                    <div class="swiper-slide"><img src="조합원교육.jpg"></div>
+                    <div class="swiper-slide"><img src="조합원교육광명.jpg"></div>
+                    <div class="swiper-slide"><img src="부부동반세미나_2.jpg"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -159,13 +162,20 @@
     <section style="padding-bottom:120px;"><img src="15.png"></section>
 
     <div class="fixed-footer">
-        <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
-        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
+        <a href="tel:01037329326" class="btn-footer">📞 전화문의</a>
+        <a href="javascript:openContactModal()" class="btn-footer" style="background:#FEE500;">💬 상담신청</a>
     </div>
 
-    <div id="modal" class="modal" onclick="closeModal()">
-        <img id="modalImg" class="modal-img">
-        <div id="modalTitle" style="margin-top:15px; font-weight:bold;"></div>
+    <div id="contactModal" class="modal-overlay" onclick="closeContactModal(event)">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeContactModal()"><i class="fas fa-times"></i></div>
+            <div class="modal-title">입사문의</div>
+            <div style="color:#FFD700; font-size:40px; margin-bottom:15px;"><i class="fas fa-phone-alt"></i></div>
+            <div class="modal-phone">010-3732-9326</div>
+            <div class="modal-manager">담당: 김재현 본부장</div>
+            <a href="tel:010-3732-9326" class="btn-main" style="width:100%; justify-content:center; margin-top:10px;">전화 연결하기</a>
+            <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn-kakao"><i class="fas fa-comment"></i> 오픈채팅방 열기</a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -176,13 +186,11 @@
             pagination: { el: ".swiper-pagination", clickable: true }
         });
 
-        function openModal(src, title) {
-            document.getElementById('modalImg').src = src;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modal').classList.add('active');
-        }
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
+        function openContactModal() { document.getElementById('contactModal').classList.add('active'); }
+        function closeContactModal(e) { 
+            if(!e || e.target.id === 'contactModal' || e.target.closest('.modal-close')) {
+                document.getElementById('contactModal').classList.remove('active');
+            }
         }
     </script>
 </body>
