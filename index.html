@@ -11,7 +11,18 @@
         img { width: 100%; display: block; }
         section { width: 100%; position: relative; }
         
-        /* 스와이프 박스 스타일 */
+        /* 1페이지 입사문의 투명 버튼 설정 */
+        .main-link {
+            position: absolute;
+            top: 65%; /* 버튼의 세로 위치 (이미지에 맞춰 조정됨) */
+            left: 30%; /* 버튼의 가로 시작 위치 */
+            width: 40%; /* 버튼의 가로 너비 */
+            height: 10%; /* 버튼의 세로 높이 */
+            cursor: pointer;
+            z-index: 10;
+            /* background: rgba(255, 255, 255, 0.3); 테스트 시 영역 확인용 (완성 후 투명하게 유지) */
+        }
+
         .content-box { 
             width: 92%; margin: 20px auto; background: #2A2A2A; 
             border-radius: 20px; overflow: hidden; 
@@ -19,9 +30,6 @@
         }
         .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
         .swiper { width: 100%; height: auto; }
-        .swiper-pagination-bullet-active { background: var(--accent-color) !important; }
-
-        /* 하단 고정 버튼 */
         .fixed-footer { 
             position: fixed; bottom: 0; width: 100%; z-index: 1000; 
             background: rgba(0,0,0,0.9); padding: 15px 0; 
@@ -37,6 +45,7 @@
 
     <section>
         <img src="alpha_recruit.png" alt="메인 이미지">
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-link"></a>
     </section>
 
     <section>
@@ -87,14 +96,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 가이드북 스와이프 (3.5초 간격)
         new Swiper(".guideSwiper", {
             loop: true,
             autoplay: { delay: 3500, disableOnInteraction: false },
             pagination: { el: ".swiper-pagination", clickable: true },
         });
-
-        // 현장 사진 스와이프 (3초 간격)
         new Swiper(".fieldSwiper", {
             loop: true,
             autoplay: { delay: 3000, disableOnInteraction: false },
