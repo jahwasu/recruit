@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알파본부 리크루팅</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
+        body { margin: 0; background-color: var(--bg-color); font-family: 'Pretendard', sans-serif; color: white; overflow-x: hidden; }
+        img { width: 100%; display: block; }
+        section { width: 100%; position: relative; }
+        .main-btn { position: absolute; top: 64%; left: 30%; width: 40%; height: 8%; cursor: pointer; z-index: 10; }
+        .content-box { width: 92%; margin: 20px auto; background: #2A2A2A; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .section-label { padding: 15px; font-weight: bold; font-size: 1.1rem; text-align: center; background: #333; }
+        .swiper { width: 100%; height: auto; }
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.9); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+        .btn { background-color: var(--accent-color); color: black; font-weight: bold; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <section>
+        <img src="alpha_recruit.png" alt="메인">
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="main-btn"></a>
+    </section>
+    <section><img src="2.png"></section>
+    <section><img src="3.png"></section>
+    <section><img src="5.png"></section>
+    <section><img src="8.png"></section>
+    <section><img src="9.png"></section>
+    <section>
+        <div class="content-box">
+            <div class="section-label">AI 기반 상담가이드북 일부</div>
+            <div class="swiper gSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="10.png"></div>
+                    <div class="swiper-slide"><img src="11.png"></div>
+                    <div class="swiper-slide"><img src="12.png"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="content-box">
+            <div class="section-label">현장 & 교육 현장</div>
+            <div class="swiper fSwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="4.png"></div>
+                    <div class="swiper-slide"><img src="6.png"></div>
+                    <div class="swiper-slide"><img src="7.png"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding-bottom:100px;"><img src="15.png"></section>
+    <div class="fixed-footer">
+        <a href="tel:01037329326" class="btn">📞 본부장 전화하기</a>
+        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="btn" style="background:#FEE500;">💬 오픈채팅 문의</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        new Swiper(".gSwiper", { loop: true, autoplay: { delay: 3500 } });
+        new Swiper(".fSwiper", { loop: true, autoplay: { delay: 3000 } });
+    </script>
+</body>
+</html>
