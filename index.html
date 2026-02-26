@@ -8,152 +8,135 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet"/>
     <style>
+        :root { --bg-color: #1F1F1F; --accent-color: #FFD700; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #1F1F1F; color: white; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: var(--bg-color); color: white; overflow-x: hidden; }
+        img { width: 100%; display: block; }
         
-        /* [수정] 배경 이미지를 main.jpg로 변경 및 화면 최적화 */
-        .main-container {
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            background-image: url("main.jpg");
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
+        /* [1페이지] 메인 히어로 섹션 */
+        .hero-section {
+            width: 100%; height: 100vh; position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("main.jpg");
+            background-size: cover; background-position: center;
         }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 25px; }
+        .hero-badge {
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 16px; border-radius: 20px; font-size: 13px; margin-bottom: 10px; display: inline-block;
+        }
+        .hero-title { font-size: 30px; line-height: 1.4; margin-bottom: 20px; }
+        .btn-recruit { background: var(--accent-color); color: #1a1a1a; padding: 16px 45px; border-radius: 12px; font-weight: 700; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; }
+
+        /* [2페이지] 젠스파크 6가지 특화 서비스 */
+        .feature-section { padding: 60px 20px; background-color: var(--bg-color); }
+        .feature-header { text-align: center; margin-bottom: 35px; }
+        .feature-card {
+            background-color: white; border-radius: 15px; padding: 22px; 
+            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;
+        }
+        .feature-card:active { transform: scale(0.97); }
+        .icon-box { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; }
         
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.65);
-            z-index: 1;
-        }
+        /* 아이콘 색상 정의 */
+        .icon-1 { background-color: #3b82f6; } .icon-2 { background-color: #10b981; }
+        .icon-3 { background-color: #f59e0b; } .icon-4 { background-color: #8b5cf6; }
+        .icon-5 { background-color: #ef4444; } .icon-6 { background-color: #06b6d4; }
 
-        .content-wrapper {
-            position: relative;
-            z-index: 2;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 25px;
-        }
+        .card-content { flex: 1; text-align: left; }
+        .card-title { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+        .card-desc { font-size: 14px; color: #666; line-height: 1.4; }
 
-        .badge-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; align-items: center; }
-        .badge {
-            background-color: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .title { font-size: 30px; text-align: center; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.02em; }
-        .subtitle { font-size: 16px; font-weight: 400; color: rgba(255, 255, 255, 0.9); text-align: center; margin-bottom: 40px; line-height: 1.6; }
-
-        .btn-primary {
-            background-color: #FFD700;
-            color: #1a1a1a;
-            padding: 16px 45px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-primary:hover { background-color: #FFC700; transform: translateY(-2px); }
-
-        .footnote {
-            position: absolute;
-            bottom: 30px; left: 25px; right: 25px;
-            z-index: 2;
-            font-size: 13px;
-            opacity: 0.8;
-            line-height: 1.5;
-        }
-
-        /* 연락처 모달 스타일 */
-        .modal-overlay {
-            display: none; position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000; justify-content: center; align-items: center;
-        }
+        /* 하단 고정 바 및 모달 */
+        .fixed-footer { position: fixed; bottom: 0; width: 100%; z-index: 1000; background: rgba(0,0,0,0.92); padding: 15px 0; display: flex; justify-content: center; gap: 10px; }
+        .footer-btn { padding: 12px 22px; border-radius: 30px; font-weight: 700; text-decoration: none; font-size: 14px; color: #000; background: var(--accent-color); }
+        
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
         .modal-overlay.active { display: flex; }
-        .modal-content {
-            background-color: white; border-radius: 20px;
-            padding: 40px 30px; width: 90%; max-width: 380px;
-            position: relative; color: #1a1a1a; text-align: center;
-        }
-        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 24px; color: #999; cursor: pointer; }
-        .modal-phone { font-size: 28px; font-weight: 700; margin: 15px 0 5px; letter-spacing: 1px; }
-        .modal-btn-kakao {
-            background-color: #FEE500; color: #000;
-            width: 100%; padding: 14px; border-radius: 10px;
-            font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;
-            margin-top: 20px; text-decoration: none;
-        }
+        .modal-content { background: white; border-radius: 20px; padding: 40px 30px; width: 90%; max-width: 380px; text-align: center; color: #1a1a1a; position: relative; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="overlay"></div>
-    
-    <div class="content-wrapper">
-        <div class="badge-container">
-            <div class="badge">B2B 파트너십</div>
-            <div class="badge">사업장별 상담센터 운용</div>
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">B2B 파트너십</div>
+            <h1 class="hero-title">
+                <span style="font-weight:400;">코스피 7000시대,</span><br>
+                <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br>
+                <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
+            </h1>
+            <button class="btn-recruit" onclick="openModal()">입사문의</button>
         </div>
+    </section>
 
-        <h1 class="title">
-            <span style="font-weight:400;">코스피 7000시대,</span><br>
-            <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br>
-            <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
-        </h1>
-
-        <div class="subtitle">
-            연금전문 알파본부는<br/>고객사 임직원의 자산관리 여정을 지원합니다.
+    <div class="feature-section">
+        <div class="feature-header">
+            <h2 style="font-size: 24px; font-weight: 900;">고객사 임직원을 위한<br>6가지 특화 서비스</h2>
         </div>
-
-        <button class="btn-primary" onclick="openModal()">
-            <i class="fas fa-user-plus"></i> 입사문의
-        </button>
+        <div class="feature-card">
+            <div class="icon-box icon-1"><i class="fas fa-building"></i></div>
+            <div class="card-content">
+                <div class="card-title">사업장별 상담센터 운영</div>
+                <div class="card-description">임직원 밀착형 상담 인프라</div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-2"><i class="fas fa-chart-line"></i></div>
+            <div class="card-content">
+                <div class="card-title">연간 임직원 교육 155회</div>
+                <div class="card-description">재무 역량을 높이는 체계적인 맞춤 교육</div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-3"><i class="fas fa-graduation-cap"></i></div>
+            <div class="card-content">
+                <div class="card-title">신입사원 첫걸음 교육 4회</div>
+                <div class="card-description">건전한 자산증식의 올바른 시작 가이드</div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-4"><i class="fas fa-piggy-bank"></i></div>
+            <div class="card-content">
+                <div class="card-title">전국 사업장 세미나 수행</div>
+                <div class="card-description">전국 방문 부부동반 재무설계 지원</div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-5"><i class="fas fa-robot"></i></div>
+            <div class="card-content">
+                <div class="card-title">AI 상담 가이드북</div>
+                <div class="card-description">자체 개발 Tool을 통한 전문 상담 실현</div>
+            </div>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-6"><i class="fas fa-handshake"></i></div>
+            <div class="card-content">
+                <div class="card-title">전문가 양성 프로그램</div>
+                <div class="card-description">실전 사례 기반의 은퇴/연금 솔루션</div>
+            </div>
+        </div>
     </div>
 
-    <div class="footnote">
-        * 굿리치 알파본부는 국내 굴지의 대기업 임직원을 대상으로 지난 수년간 자산관리 교육 / 1:1 재무상담 / 법률자문 서비스 업무를 수행하고 있습니다.
+    <div class="fixed-footer">
+        <a href="tel:01037329326" class="footer-btn">📞 전화문의</a>
+        <a href="javascript:openModal()" class="footer-btn" style="background:#FEE500;">💬 상담신청</a>
     </div>
-</div>
 
-<div class="modal-overlay" id="contactModal" onclick="if(event.target==this) closeModal()">
-    <div class="modal-content">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <h2 style="font-size:22px; font-weight:700;">입사문의</h2>
-        <div style="color:#FFD700; font-size:40px; margin-top:20px;"><i class="fas fa-phone-alt"></i></div>
-        <div class="modal-phone">010-3732-9326</div>
-        <div style="color:#666; margin-bottom:20px;">담당: 김재현 본부장</div>
-        
-        <a href="tel:010-3732-9326" class="btn-primary" style="width:100%; justify-content:center;">전화 연결하기</a>
-        <a href="https://open.kakao.com/o/sGSSodii" target="_blank" class="modal-btn-kakao">
-            <i class="fas fa-comment"></i> 오픈채팅방 열기
-        </a>
+    <div class="modal-overlay" id="contactModal" onclick="if(event.target==this) closeModal()">
+        <div class="modal-content">
+            <h2 style="font-size:22px; font-weight:700;">입사문의</h2>
+            <div style="color:#FFD700; font-size:40px; margin-top:20px;"><i class="fas fa-phone-alt"></i></div>
+            <div style="font-size:28px; font-weight:900; margin-top:10px;">010-3732-9326</div>
+            <div style="color:#666; margin-bottom:25px;">담당: 김재현 본부장</div>
+            <a href="https://open.kakao.com/o/sGSSodii" target="_blank" style="background:#FEE500; display:block; padding:15px; border-radius:10px; font-weight:800; text-decoration:none; color:black;">💬 오픈채팅방 열기</a>
+        </div>
     </div>
-</div>
 
-<script>
-    function openModal() { document.getElementById('contactModal').classList.add('active'); }
-    function closeModal() { document.getElementById('contactModal').classList.remove('active'); }
-</script>
-
+    <script>
+        function openModal() { document.getElementById('contactModal').classList.add('active'); }
+        function closeModal() { document.getElementById('contactModal').classList.remove('active'); }
+    </script>
 </body>
 </html>
