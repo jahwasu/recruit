@@ -2,10 +2,16 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <title>연금 전문가 모집 - 알파본부</title>
+<meta property="og:type"        content="website"/>
+<meta property="og:title"       content="연금 전문가 모집 - 알파본부"/>
+<meta property="og:description" content="알파본부는 DB가 아닌 치열하게 도전할 시장(Market)을 제공합니다."/>
+<meta property="og:image"       content="https://jahwasu.github.io/recruit-site/main.jpg"/>
+<meta property="og:url"         content="https://jahwasu.github.io/recruit-site/"/>
+<meta name="twitter:card"       content="summary_large_image"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,7 +26,6 @@ html, body {
   font-family: 'Noto Sans KR', sans-serif;
   background: #000;
   height: 100%;
-  /* ✅ overflow hidden 제거 → app이 직접 제어 */
   overflow: hidden;
   touch-action: none;
 }
@@ -83,7 +88,7 @@ html, body {
 
 /* ══ PAGE 1 ══ */
 #p1 {
-  background-image: url("images/p1-cover.jpg");
+  background-image: url("main.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -95,11 +100,11 @@ html, body {
 #p1 .inner {
   position: relative; z-index: 2;
   flex: 1; display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  padding: 50px 30px 80px;
+  justify-content: flex-start; align-items: center;
+  padding: calc(16.67% + 90px) 30px 0;
   text-align: center;
 }
-.badge-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; align-items: center; }
+.badge-row { position: absolute; top: calc(8.33% + 45px); left: 0; right: 0; z-index: 3; display: flex; flex-direction: column; gap: 8px; align-items: center; transform: translateY(-50%); }
 .badge {
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
@@ -107,8 +112,15 @@ html, body {
   padding: 6px 16px; border-radius: 16px;
   font-size: 12px; font-weight: 500; color: white;
 }
-.p1-title { font-size: 32px; color: white; line-height: 1.45; letter-spacing: -0.02em; margin-bottom: 20px; }
-.p1-sub { font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 40px; }
+.p1-title { font-size: 32px; color: white; line-height: 1.45; letter-spacing: -0.02em; margin-top: 40px; margin-bottom: 30px; }
+.p1-sub {
+  font-family: 'Gowun Batang', serif;
+  font-size: 18px; color: rgba(255,255,255,0.95); line-height: 1.8;
+  letter-spacing: -0.02em;
+  position: absolute; top: 65%; left: 30px; right: 30px; transform: translateY(-50%); z-index: 2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6);
+}
+.p1-sub span { text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.5); }
 .btn-gold {
   padding: 16px 40px; border-radius: 8px;
   font-size: 18px; font-weight: 700; cursor: pointer;
@@ -117,8 +129,9 @@ html, body {
   transition: all .3s;
 }
 .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,215,0,.4); }
+#p1 .btn-gold { margin-top: auto; margin-bottom: max(120px, env(safe-area-inset-bottom) + 100px); }
 #p1 .footnote {
-  position: absolute; bottom: 20px; left: 30px; right: 50px;
+  position: absolute; bottom: max(20px, env(safe-area-inset-bottom)); left: 30px; right: 50px;
   z-index: 2; font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5;
 }
 .swipe-hint {
@@ -129,6 +142,16 @@ html, body {
 @keyframes bounce {
   0%,100% { transform: translateX(50%) translateY(0); }
   50% { transform: translateX(50%) translateY(8px); }
+}
+
+/* 좁은 화면(삼성 플립 등): 첫 줄 유지를 위해 텍스트 축소 */
+@media (max-width: 400px) {
+  .p1-title { font-size: 24px; }
+  .p1-sub { font-size: 15px; }
+}
+@media (max-width: 340px) {
+  .p1-title { font-size: 21px; }
+  .p1-sub { font-size: 14px; }
 }
 
 /* ══ SHARED DARK PAGE ══ */
@@ -148,10 +171,11 @@ html, body {
 }
 
 /* ══ PAGE 2 ══ */
-#p2 .cards-list { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+#p2 .dark-inner { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+#p2 .cards-list { flex: 1; display: flex; flex-direction: column; gap: 7px; }
 .feature-card {
-  flex: 1; background: white; border-radius: 12px;
-  padding: 14px 16px; display: flex; align-items: center; gap: 14px;
+  flex: 1; background: white; border-radius: 10px;
+  padding: 10px 14px; display: flex; align-items: center; gap: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,.08); transition: all .3s;
 }
 .feature-card:active { transform: scale(0.96); }
@@ -163,7 +187,7 @@ html, body {
 .ic1{background:#3b82f6}.ic2{background:#10b981}.ic3{background:#f59e0b}
 .ic4{background:#8b5cf6}.ic5{background:#ef4444}.ic6{background:#06b6d4}
 .fc-title { font-size: 16px; font-weight: 700; color: #1a1a1a; line-height: 1.3; margin-bottom: 4px; }
-.fc-desc { font-size: 13px; color: #666; line-height: 1.4; }
+.fc-desc { font-size: 13px; color: #666; line-height: 1.4; text-align: left; padding-right: 8px; }
 .small-note { font-size: 11px; }
 
 /* ══ PAGE 3 ══ */
@@ -204,14 +228,16 @@ html, body {
 .lb-cap-meta { font-size: 14px; color: rgba(255,255,255,.85); }
 
 /* ══ PAGE 4 ══ */
-#p4 .dark-inner { overflow-y: auto; -webkit-overflow-scrolling: touch; }
-#p4 .cards-col { display: flex; flex-direction: column; gap: 14px; flex: 1; }
-.ws-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
-.ws-img { width: 100%; height: 140px; object-fit: cover; }
-.ws-body { padding: 14px 16px; }
-.ws-title { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
-.ws-desc { font-size: 12px; color: #666; margin-bottom: 10px; line-height: 1.4; }
-.ws-features { display: flex; flex-direction: column; gap: 6px; }
+#p4 .dark-inner { overflow-y: hidden; padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+#p4 .cards-col { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.ws-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.08); flex: 1; display: flex; flex-direction: column; transition: all .3s; }
+.ws-card:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(0,0,0,.14); }
+.ws-img { width: 100%; height: 130px; object-fit: cover; flex-shrink: 0; }
+.ws-body { flex: 1; display: flex; flex-direction: column; }
+.ws-body { padding: 10px 14px; }
+.ws-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+.ws-desc { font-size: 11px; color: #666; margin-bottom: 8px; line-height: 1.4; }
+.ws-features { display: flex; flex-direction: column; gap: 4px; }
 .ws-feat { display: flex; align-items: flex-start; gap: 8px; }
 .ws-check {
   width: 16px; height: 16px; border-radius: 50%;
@@ -232,6 +258,7 @@ html, body {
   box-shadow: 0 2px 8px rgba(0,0,0,.08); transition: all .3s; cursor: pointer;
 }
 .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,.12); }
+.kpi-card:active { transform: scale(0.95); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
 .kpi-icon {
   width: 46px; height: 46px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
@@ -247,7 +274,7 @@ html, body {
 #p6 .ai-slider-box {
   border-radius: 12px; background: white; overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  height: 290px; position: relative; margin-bottom: 0;
+  height: clamp(180px, 38vh, 290px); position: relative; margin-bottom: 0;
 }
 #p6 .ai-track { display: flex; height: 100%; transition: transform .3s cubic-bezier(.4,0,.2,1); }
 #p6 .ai-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 16px; }
@@ -256,7 +283,7 @@ html, body {
 .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); cursor: pointer; transition: all .3s; }
 .ai-dot.active { width: 24px; border-radius: 4px; background: var(--gold); }
 .ai-counter { text-align: center; font-size: 12px; color: #cbd5e0; margin-bottom: 12px; }
-.ai-badges { display: flex; flex-direction: column; gap: 7px; }
+.ai-badges { display: flex; flex-direction: column; gap: 12px; padding-bottom: 10px; }
 .ai-badge {
   background: rgba(255,255,255,.95); border: 1px solid rgba(0,0,0,.1);
   border-radius: 8px; padding: 10px 14px;
@@ -268,7 +295,7 @@ html, body {
 #p7 { background: var(--dark); display: flex; flex-direction: column; }
 #p7 .inner {
   flex: 1; display: flex; flex-direction: column;
-  padding: 50px 30px 20px;
+  padding: 50px 30px max(20px, env(safe-area-inset-bottom));
   justify-content: space-between;
 }
 .p7-title { font-size: 26px; font-weight: 400; color: white; line-height: 1.55; text-align: center; margin-bottom: 0; }
@@ -325,6 +352,11 @@ html, body {
 .modal-phone { font-size: 26px; font-weight: 700; color: #1a1a1a; text-align: center; margin-bottom: 8px; letter-spacing: 1px; }
 .modal-mgr { font-size: 14px; color: #666; text-align: center; margin-bottom: 16px; }
 .modal-sec-lbl { font-size: 13px; font-weight: 600; color: #666; text-align: center; margin-bottom: 10px; }
+.modal-back-hint {
+  font-size: 11px; color: #555; line-height: 1.5; text-align: center;
+  margin-bottom: 14px; padding: 8px 10px; background: #f5f5f5; border-radius: 8px;
+}
+.modal-back-hint strong { color: #333; }
 .modal-btn-row { display: flex; gap: 10px; }
 .mbtn {
   flex: 1; padding: 13px; border-radius: 8px;
@@ -335,6 +367,19 @@ html, body {
 .mbtn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
 .mbtn-kakao { background: #FEE500; color: #000; }
 .mbtn-kakao:hover { background: #FDD835; transform: translateY(-2px); }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed; bottom: calc(30px + env(safe-area-inset-bottom));
+  left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.82); color: white;
+  padding: 12px 20px; border-radius: 24px;
+  font-size: 13px; line-height: 1.5; text-align: center;
+  white-space: normal; max-width: 80vw; z-index: 9999;
+  opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+#toast.show { opacity: 1; }
+
 </style>
 </head>
 <body>
@@ -365,60 +410,60 @@ html, body {
           <span style="font-weight:900;">머니무브의 큰 물결</span><span style="font-weight:400;">을 이끌</span><br/>
           <span style="font-weight:900;">연금 전문가</span><span style="font-weight:400;">를 모십니다.</span>
         </h1>
-        <p class="p1-sub">연금전문 알파본부는<br/>고객사<sup>*</sup> 임직원의 자산관리 여정을 지원합니다.</p>
+        <p class="p1-sub">알파본부는 DB가 아닌<br/><span style="color:#FFB347; font-weight:700;">치열하게 도전할 시장(Market)</span>을 제공합니다.</p>
         <button class="btn-gold" onclick="openModal()">
-          <i class="fas fa-user-plus"></i> 입사문의
+          <i class="fas fa-user-plus"></i> 입사/마케팅 문의
         </button>
       </div>
-      <div class="footnote">* 굿리치 알파본부는 국내 굴지의 대기업 임직원을 대상으로 수년간 자산관리<br/>교육/1:1재무상담/법률자문 서비스 업무를 수행하고 있습니다. [2024.3 ~ ]</div>
+      <div class="footnote">굿리치 알파본부는 국내 굴지의 대기업 임직원을 대상으로 수년간 자산관리 교육 / 1:1 자산관리 상담 / 법률자문 서비스 업무를 수행해오고 있습니다.</div>
       <div class="swipe-hint"><i class="fas fa-chevron-down"></i></div>
     </div>
 
     <!-- PAGE 2 -->
     <div class="page dark-page" id="p2">
       <div class="dark-inner">
-        <div class="pg-title">고객사 임직원을 위한 6가지 특화 서비스</div>
+        <div class="pg-title">고객사 임직원<span style="font-weight:400">을 위한</span> 특화서비스</div>
         <div class="cards-list">
           <div class="feature-card">
             <div class="icon-circle ic1"><i class="fas fa-building"></i></div>
             <div>
               <div class="fc-title">사업장별 상담센터 운영</div>
-              <div class="fc-desc">임직원 접근성을 극대화한 밀착형 상담 인프라를 갖추고 있습니다.</div>
+              <div class="fc-desc">임직원의 편안한 상담을 위해 구내식당・카페에 인접한 상담인프라를 운영합니다.</div>
             </div>
           </div>
           <div class="feature-card">
             <div class="icon-circle ic2"><i class="fas fa-chart-line"></i></div>
             <div>
-              <div class="fc-title">연간 임직원 교육 155회 <span class="small-note">('25년 기준)</span></div>
-              <div class="fc-desc">전체 임직원을 대상으로 1.5Hr 체계적인 교육을 통해 재무 역량을 높입니다.</div>
+              <div class="fc-title">연간 임직원 교육 155회 <span class="small-note" style="font-weight:400;">('25년 기준)</span></div>
+              <div class="fc-desc">전체 임직원 대상의 연간 교육과정(자산관리/재무설계 1hr)을 운영합니다.</div>
             </div>
           </div>
           <div class="feature-card">
             <div class="icon-circle ic3"><i class="fas fa-graduation-cap"></i></div>
             <div>
-              <div class="fc-title">신입사원 자산관리 첫걸음 교육 4회 <span class="small-note">('25년 기준)</span></div>
-              <div class="fc-desc">신입사원 연수과정에 함께하여 건전한 자산증식의 첫걸음을 돕고 있습니다.</div>
+              <div class="fc-title">신입사원 자산관리 교육 4회 <span class="small-note" style="font-weight:400;">('25년 기준)</span></div>
+              <div class="fc-desc">신입사원 연수과정에 함께하여 사회 초년생의 자산증식 첫걸음을 돕고 있습니다.</div>
             </div>
           </div>
           <div class="feature-card">
             <div class="icon-circle ic4"><i class="fas fa-piggy-bank"></i></div>
             <div>
-              <div class="fc-title">우리사주조합 전국사업장 세미나 수행</div>
-              <div class="fc-desc">전국 사업장 방문 부부동반 세미나를 통해 가족 단위 재무설계를 지원합니다.</div>
+              <div class="fc-title">사주조합 전국사업장 세미나 수행</div>
+              <div class="fc-desc">사주조합이 주최하는 전국사업장 순회 부부동반 자산관리 세미나를 수행하고 있습니다.</div>
             </div>
           </div>
           <div class="feature-card">
             <div class="icon-circle ic5"><i class="fas fa-robot"></i></div>
             <div>
-              <div class="fc-title">AI 상담 가이드북 <span class="small-note">(Web 기반)</span></div>
-              <div class="fc-desc">자체 개발한 AI Consulting Tool로 전문적인 자산관리 상담을 실현합니다.</div>
+              <div class="fc-title">AI 상담 가이드북 <span class="small-note" style="font-weight:400;">(Web 기반)</span></div>
+              <div class="fc-desc">자산관리 상담의 품질유지를 위해, AI 상담도구를 자체 개발하여 운영합니다.</div>
             </div>
           </div>
           <div class="feature-card">
             <div class="icon-circle ic6"><i class="fas fa-handshake"></i></div>
             <div>
               <div class="fc-title">자산관리 전문가 양성 프로그램</div>
-              <div class="fc-desc">매주 Case Study로 실전 사례 기반의 은퇴/연금설계 솔루션을 발전시킵니다.</div>
+              <div class="fc-desc">매주 Case Study를 통해 실전 사례 기반의 자산관리/은퇴설계 솔루션을 발전시킵니다.</div>
             </div>
           </div>
         </div>
@@ -428,30 +473,30 @@ html, body {
     <!-- PAGE 3 -->
     <div class="page dark-page" id="p3">
       <div class="dark-inner">
-        <div class="pg-title">현장 &amp; 교육</div>
+        <div class="pg-title">재무교육 스케치</div>
         <div class="pg-sub" style="margin-bottom:14px;">알파본부의 생생한 자산관리 교육 현장</div>
         <div class="slider-outer">
           <div class="slider-box" id="p3box">
             <div class="s-track" id="p3track">
               <div class="s-item" data-idx="0">
-                <img src="images/p3-slide1-신입교육-26상반기.jpg" alt="26년 상반기 신입사원 교육"/>
+                <img src="cus_01.png" alt="26년 상반기 신입사원 교육"/>
                 <div class="s-caption"><div class="s-cap-title">26년 상반기 신입사원 교육</div><div class="s-cap-meta">연수원</div></div>
               </div>
               <div class="s-item" data-idx="1">
-                <img src="images/p3-slide2-신입교육-25하반기.jpg" alt="25년 하반기 신입사원 교육"/>
+                <img src="cus_02.png" alt="25년 하반기 신입사원 교육"/>
                 <div class="s-caption"><div class="s-cap-title">25년 하반기 신입사원 교육</div><div class="s-cap-meta">연수원</div></div>
               </div>
               <div class="s-item" data-idx="2">
-                <img src="images/p3-slide3-임직원교육-25년.jpg" alt="25년 임직원 교육"/>
+                <img src="cus_03.png" alt="25년 임직원 교육"/>
                 <div class="s-caption"><div class="s-cap-title">25년 임직원 교육</div><div class="s-cap-meta">외부 연수원</div></div>
               </div>
               <div class="s-item" data-idx="3">
-                <img src="images/p3-slide4-임직원교육-25년b.jpg" alt="25년 임직원 교육"/>
-                <div class="s-caption"><div class="s-cap-title">25년 임직원 교육</div><div class="s-cap-meta">외부 연수원</div></div>
+                <img src="cus_04.png" alt="25년 부부동반 세미나"/>
+                <div class="s-caption"><div class="s-cap-title">25년 부부동반 세미나</div><div class="s-cap-meta">교육장</div></div>
               </div>
               <div class="s-item" data-idx="4">
-                <img src="images/p3-slide5-부부동반세미나.jpg" alt="25년 부부동반 세미나"/>
-                <div class="s-caption"><div class="s-cap-title">25년 부부동반 세미나</div><div class="s-cap-meta">교육장</div></div>
+                <img src="cus_05.png" alt="25년 임직원 교육"/>
+                <div class="s-caption"><div class="s-cap-title">25년 임직원 교육</div><div class="s-cap-meta">외부 연수원</div></div>
               </div>
             </div>
           </div>
@@ -469,13 +514,13 @@ html, body {
     <!-- PAGE 4 -->
     <div class="page dark-page" id="p4">
       <div class="dark-inner">
-        <div class="pg-title">사업장별 상담센터</div>
-        <div class="pg-sub">주요 사업장에 운영중인 알파본부 상담센터를 소개합니다.</div>
+        <div class="pg-title"><span style="font-weight:400">사업장별</span> 상담센터</div>
+        <div class="pg-sub">주요 사업장에 운영중인 상담센터를 소개합니다.</div>
         <div class="cards-col">
           <div class="ws-card">
-            <img class="ws-img" src="images/p4-center-gwangmyeong.jpg" alt="광명 상담센터 전경"/>
+            <img class="ws-img" src="center_01.png" alt="G 상담센터 전경"/>
             <div class="ws-body">
-              <div class="ws-title">광명 상담센터</div>
+              <div class="ws-title">G 상담센터</div>
               <div class="ws-desc">사업장 구내식당 내 위치하여 임직원의 접근성이 뛰어납니다.</div>
               <div class="ws-features">
                 <div class="ws-feat"><div class="ws-check"><i class="fas fa-check"></i></div><div class="ws-feat-text">재무/연금상담과 병원비 청구지원</div></div>
@@ -485,9 +530,9 @@ html, body {
             </div>
           </div>
           <div class="ws-card">
-            <img class="ws-img" src="images/p4-center-hwaseong.jpg" alt="화성 상담센터 내부"/>
+            <img class="ws-img" src="center_02.jpg" alt="H 상담센터 내부"/>
             <div class="ws-body">
-              <div class="ws-title">화성 상담센터</div>
+              <div class="ws-title">H 상담센터</div>
               <div class="ws-desc">맞춤형 상담을 지원하는 안정된 독립형 공간입니다.</div>
               <div class="ws-features">
                 <div class="ws-feat"><div class="ws-check"><i class="fas fa-check"></i></div><div class="ws-feat-text">구내 은행/카페/여행사와 인접한 최적의 입지</div></div>
@@ -503,14 +548,14 @@ html, body {
     <!-- PAGE 5 -->
     <div class="page dark-page" id="p5">
       <div class="dark-inner">
-        <div class="pg-title" style="margin-bottom:18px;">알파본부의 역량을<br/>데이터로 증명합니다.</div>
+        <div class="pg-title" style="margin-bottom:18px;"><span style="font-weight:400">데이터로 증명된</span> 마케팅 역량</div>
         <div class="kpi-grid">
-          <div class="kpi-card"><div class="kpi-icon ki1"><i class="fas fa-users"></i></div><div class="kpi-num">25,000명</div><div class="kpi-lbl">교육참여 임직원수</div></div>
-          <div class="kpi-card"><div class="kpi-icon ki2"><i class="fas fa-calendar-check"></i></div><div class="kpi-num">150회</div><div class="kpi-lbl">연간 재무교육 진행</div></div>
-          <div class="kpi-card"><div class="kpi-icon ki3"><i class="fas fa-user-check"></i></div><div class="kpi-num">890명</div><div class="kpi-lbl">교육 후 상담신청</div></div>
-          <div class="kpi-card"><div class="kpi-icon ki4"><i class="fas fa-chart-line"></i></div><div class="kpi-num">15건</div><div class="kpi-lbl">상담사 월 상담회수</div></div>
-          <div class="kpi-card"><div class="kpi-icon ki5"><i class="fas fa-redo"></i></div><div class="kpi-num">68%</div><div class="kpi-lbl">재무상담 2차 진행</div></div>
-          <div class="kpi-card"><div class="kpi-icon ki6"><i class="fas fa-robot"></i></div><div class="kpi-num">90%</div><div class="kpi-lbl">AI 상담가이드 활용도</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki1"><i class="fas fa-users"></i></div><div class="kpi-num" data-count="25000" data-suffix="명" data-sep="true">0명</div><div class="kpi-lbl">교육참여 임직원수</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki2"><i class="fas fa-calendar-check"></i></div><div class="kpi-num" data-count="155" data-suffix="회">0회</div><div class="kpi-lbl">연간 재무교육 진행</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki3"><i class="fas fa-user-check"></i></div><div class="kpi-num" data-count="890" data-suffix="명">0명</div><div class="kpi-lbl">교육후 재무상담 진행</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki4"><i class="fas fa-chart-line"></i></div><div class="kpi-num" data-count="15" data-suffix="건">0건</div><div class="kpi-lbl">상담사 월 상담회수</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki5"><i class="fas fa-redo"></i></div><div class="kpi-num" data-count="68" data-suffix="%">0%</div><div class="kpi-lbl">재무상담 2차 진행</div></div>
+          <div class="kpi-card"><div class="kpi-icon ki6"><i class="fas fa-robot"></i></div><div class="kpi-num" data-count="90" data-suffix="%">0%</div><div class="kpi-lbl">AI 상담가이드 활용목표</div></div>
         </div>
         <div class="kpi-note">* 2025년 실적기준</div>
       </div>
@@ -520,14 +565,15 @@ html, body {
     <div class="page dark-page" id="p6">
       <div class="dark-inner">
         <div class="pg-title">AI 기반 상담가이드북<span style="font-size:18px;font-weight:400;">_일부</span></div>
-        <div class="pg-sub">알파본부가 자체 제작한 웹 전용 연금/은퇴상담 가이드북을 소개합니다.</div>
+        <div class="pg-sub">자체 제작한 웹 전용 연금/은퇴상담 가이드북을 소개합니다.</div>
+        <div style="flex:1;"></div>
         <div class="ai-slider-box" id="aibox">
           <div class="ai-track" id="aitrack">
-            <div class="ai-item"><img src="images/p6-guide1-골든타임.jpg" alt="지금이 골든타임입니다"/></div>
-            <div class="ai-item"><img src="images/p6-guide2-복리효과.jpg" alt="복리 효과"/></div>
-            <div class="ai-item"><img src="images/p6-guide3-sp500-30년.jpg" alt="장기투자 S&P 500 30년"/></div>
-            <div class="ai-item"><img src="images/p6-guide4-개별종목비교.jpg" alt="개별 종목 vs S&P 500"/></div>
-            <div class="ai-item"><img src="images/p6-guide5-세후수익률.jpg" alt="세후 실질수익률"/></div>
+            <div class="ai-item"><img src="ai_01.png" alt="지금이 골든타임입니다"/></div>
+            <div class="ai-item"><img src="ai_02.png" alt="복리 효과"/></div>
+            <div class="ai-item"><img src="ai_03.png" alt="장기투자 S&P 500 30년"/></div>
+            <div class="ai-item"><img src="ai_04.png" alt="개별 종목 vs S&P 500"/></div>
+            <div class="ai-item"><img src="ai_05.png" alt="세후 실질수익률"/></div>
           </div>
         </div>
         <div class="ai-dots" id="aidots">
@@ -538,11 +584,13 @@ html, body {
           <div class="ai-dot" data-ai="4"></div>
         </div>
         <div class="ai-counter"><span id="aiCur">1</span> / 5</div>
-        <div class="ai-badges">
-          <div class="ai-badge">능숙한 자산관리 상담을 지원하는 AP Tool</div>
-          <div class="ai-badge">인터랙티브 차트와 시뮬레이션</div>
-          <div class="ai-badge">절세계좌를 활용한 장기투자 스토리 지원</div>
+        <div style="flex:1;"></div>
+        <div class="ai-badges" style="margin-bottom:0; padding-bottom:0; margin-top:-20px;">
+          <div class="ai-badge">체계적인 상담을 지원하는 AI 상담가이드 북</div>
+          <div class="ai-badge">인터렉티브 챠트와 시뮬레이터로 상담 몰입도 향상</div>
+          <div class="ai-badge">세후 실질수익률 향상을 위한 스토리 가이드</div>
         </div>
+        <div style="flex:1;"></div>
       </div>
     </div>
 
@@ -550,39 +598,33 @@ html, body {
     <div class="page" id="p7">
       <div class="inner">
         <div style="text-align:center;">
-          <h1 class="p7-title">보장분석을 넘어,<br/><span class="p7-bold">자산관리 전문가로 성장</span>할<br/>인재를 찾습니다.</h1>
+          <h1 class="p7-title">보장분석을 넘어,<br/><span class="p7-bold" style="color:#FEE500">자산관리 전문가로 성장</span>할<br/>인재를 찾습니다.</h1>
         </div>
         <div class="qr-card">
           <div class="qr-label">알파본부 입사문의 오픈채팅방</div>
-          <div class="qr-img"><img src="images/p7-qr-kakao.jpg" alt="오픈채팅 QR코드"/></div>
-          <a class="qr-url" href="https://open.kakao.com/o/sGSSodii" target="_blank">https://open.kakao.com/o/sGSSodii</a>
+          <div class="qr-img"><img src="qr.JPG" alt="오픈채팅 QR코드"/></div>
+          <a class="qr-url" href="https://open.kakao.com/o/sGSSodii" target="_blank" rel="noopener noreferrer">https://open.kakao.com/o/sGSSodii</a>
         </div>
         <div class="cta-btns">
-          <button class="btn-kakao" onclick="openKakao()"><i class="fas fa-comment"></i> 입사문의</button>
-          <button class="btn-call-cta" onclick="callPhone()"><i class="fas fa-phone"></i> 전화하기</button>
+          <button class="btn-kakao" onclick="openKakao()"><i class="fas fa-comment"></i> 입사/AI상담도구 문의</button>
         </div>
-        <div class="p7-footer">운영책임 alpha@goodrich.co.kr</div>
+        <div class="p7-footer">운영책임 <a href="mailto:jahwasu@gmail.com" style="color:#cbd5e1; text-decoration:underline;">jahwasu@gmail.com</a></div>
       </div>
     </div>
 
   </div><!-- /slide-track -->
 </div><!-- /app -->
 
+<div id="toast">오픈채팅이 새 탭에서 열립니다.<br/>채용 페이지로 돌아오려면 이전 탭을 눌러주세요.</div>
+
 <!-- 모달 -->
 <div class="modal-bg" id="contactModal" onclick="closeModalBg(event)">
-  <div class="modal-box">
+  <div class="modal-box" style="padding:24px 22px;">
     <button class="modal-x" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    <div class="modal-ttl">입사문의</div>
-    <div class="modal-sec">
-      <div class="modal-icon-wrap"><i class="fas fa-phone-alt"></i></div>
-      <div class="modal-phone">010-3732-9326</div>
-      <div class="modal-mgr">담당: 김재현 본부장</div>
-      <div class="modal-btn-row">
-        <button class="mbtn mbtn-gold" onclick="callPhone()"><i class="fas fa-phone"></i> 전화하기</button>
-      </div>
-    </div>
-    <div class="modal-sec">
-      <div class="modal-sec-lbl">알파본부 입사문의 오픈채팅방</div>
+    <div class="modal-ttl" style="font-size:17px; margin-bottom:18px; line-height:1.5;">입사문의 or AI 상담도구 문의</div>
+    <div class="modal-sec" style="margin-bottom:0; padding-bottom:0; border-bottom:none;">
+      <div class="modal-sec-lbl">알파본부 입사/마케팅 문의 오픈채팅방</div>
+      <p class="modal-back-hint">오픈채팅은 <strong>새 탭</strong>에서 열립니다. 채용 페이지로 돌아오려면 <strong>이전 탭</strong>을 다시 눌러주세요.</p>
       <div class="modal-btn-row">
         <button class="mbtn mbtn-kakao" onclick="openKakao()"><i class="fas fa-comment"></i> 오픈채팅방 열기</button>
       </div>
@@ -602,6 +644,17 @@ html, body {
 
 <script>
 // ═══════════════════════════════════════════
+//  가벼운 햅틱 (2p 6박스, 4p 2박스, 5p 6박스)
+// ═══════════════════════════════════════════
+function lightHaptic() {
+  if (navigator.vibrate) navigator.vibrate(10);
+}
+document.getElementById('app').addEventListener('click', e => {
+  const box = e.target.closest('.feature-card, .ws-card, .kpi-card');
+  if (box) lightHaptic();
+}, { passive: true });
+
+// ═══════════════════════════════════════════
 //  메인 페이지 전환
 // ═══════════════════════════════════════════
 const track     = document.getElementById('slide-track');
@@ -615,14 +668,58 @@ let isAnimating = false;
 // 내부 슬라이더가 있는 페이지 인덱스 (터치 충돌 방지)
 const innerSliderPages = new Set([2, 5]); // PAGE 3(idx2), PAGE 6(idx5)
 
+function getPageH() { return window.innerHeight; }
+
 function goToPage(idx) {
   if (idx < 0 || idx >= totalPages || isAnimating) return;
   isAnimating = true;
   curPage = idx;
-  track.style.transform = `translate3d(0, -${curPage * 100}vh, 0)`;
+  track.style.transform = `translate3d(0, -${curPage * getPageH()}px, 0)`;
   pageDots.forEach((d, i) => d.classList.toggle('active', i === curPage));
+  if (sliderResets[idx]) sliderResets[idx]();
   setTimeout(() => { isAnimating = false; }, 550);
 }
+
+// 화면 크기 변경(회전 등) 시 위치 재계산
+window.addEventListener('resize', () => {
+  track.style.transition = 'none';
+  track.style.transform = `translate3d(0, -${curPage * getPageH()}px, 0)`;
+  setTimeout(() => { track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)'; }, 50);
+});
+
+// ═══════════════════════════════════════════
+//  KPI 카운트업 애니메이션
+// ═══════════════════════════════════════════
+function runKpiCountUp() {
+  const duration = 1800;
+  const raf = window.requestAnimationFrame || (cb => setTimeout(cb, 16));
+  const cards = document.querySelectorAll('#p5 .kpi-num[data-count]');
+  cards.forEach(el => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const sep    = el.dataset.sep === 'true';
+    const start  = Date.now();           // performance.now() 대신 Date.now() — WebView 호환
+    function fmt(n) {
+      return sep ? n.toLocaleString('ko-KR') + suffix : n + suffix;
+    }
+    el.textContent = fmt(0);
+    function step() {
+      const t = Math.min((Date.now() - start) / duration, 1);
+      // easeOutQuart: 처음 빠르게, 마지막에 천천히
+      const ease = 1 - Math.pow(1 - t, 4);
+      const cur  = Math.round(target * ease);
+      el.textContent = fmt(cur);
+      if (t < 1) raf(step);
+    }
+    raf(step);
+  });
+}
+
+// 슬라이더 리셋 콜백 등록소
+const sliderResets = {};
+
+// KPI 페이지(idx=4) 진입 시 카운트업 재실행
+sliderResets[4] = () => { runKpiCountUp(); };
 
 // 점 클릭
 pageDots.forEach(d =>
@@ -645,21 +742,26 @@ document.getElementById('app').addEventListener('touchstart', e => {
 }, { passive: true });
 
 document.getElementById('app').addEventListener('touchend', e => {
-  if (touchInInner) return;   // 내부 슬라이더 터치는 무시
+  if (isAnimating) return;
   const dy = touchStartY - e.changedTouches[0].clientY;
   const dx = Math.abs(touchStartX - e.changedTouches[0].clientX);
-  if (Math.abs(dy) > 50 && Math.abs(dy) > dx * 1.2) {
+  const isVertical = Math.abs(dy) > 50 && Math.abs(dy) > dx * 1.2;
+  // 내부 슬라이더라도 수직 스와이프면 페이지 전환 허용
+  if (touchInInner && !isVertical) return;
+  if (isVertical) {
     dy > 0 ? goToPage(curPage + 1) : goToPage(curPage - 1);
   }
 }, { passive: true });
 
 // ── 마우스 휠 ──
 let wheelCooldown = false;
+let wheelTimer = null;
 document.getElementById('app').addEventListener('wheel', e => {
   e.preventDefault();
   if (wheelCooldown || isAnimating) return;
   wheelCooldown = true;
-  setTimeout(() => { wheelCooldown = false; }, 700);
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => { wheelCooldown = false; }, 1100); // 애니메이션(550ms) + 충분한 여유
   e.deltaY > 0 ? goToPage(curPage + 1) : goToPage(curPage - 1);
 }, { passive: false });
 
@@ -720,6 +822,9 @@ document.addEventListener('keydown', e => {
     else if (dx >  50 && cur > 0)                cur--;
     upd();
   }, { passive: true });
+
+  // 페이지 2(idx=2) 진입 시 첫 슬라이드로 리셋
+  sliderResets[2] = () => { cur = 0; trk.style.transition = 'none'; upd(); };
 })();
 
 
@@ -768,15 +873,26 @@ document.addEventListener('keydown', e => {
   }
   function resetAuto() { clearInterval(autoTimer); startAuto(); }
   startAuto();
+
+  // 페이지 5(idx=5) 진입 시 첫 슬라이드로 리셋
+  sliderResets[5] = () => { cur = 0; clearInterval(autoTimer); trk.style.transition = 'none'; upd(); startAuto(); };
 })();
 
 
 // ═══════════════════════════════════════════
 //  모달
 // ═══════════════════════════════════════════
-function openModal()  { document.getElementById('contactModal').classList.add('open'); }
-function closeModal() { document.getElementById('contactModal').classList.remove('open'); }
+function openModal() {
+  document.getElementById('contactModal').classList.add('open');
+  history.pushState({ modal: true }, '');
+}
+function closeModal() {
+  document.getElementById('contactModal').classList.remove('open');
+}
 function closeModalBg(e) { if (e.target.id === 'contactModal') closeModal(); }
+window.addEventListener('popstate', function() {
+  if (document.getElementById('contactModal').classList.contains('open')) closeModal();
+});
 
 // ═══════════════════════════════════════════
 //  라이트박스
@@ -788,7 +904,41 @@ function closeLightboxBg(e)  { if (e.target.id === 'lightbox') closeLightbox(); 
 //  외부 링크
 // ═══════════════════════════════════════════
 function callPhone() { window.location.href = 'tel:01037329326'; }
-function openKakao() { window.open('https://open.kakao.com/o/sGSSodii', '_blank'); }
+function openKakao() {
+  const a = document.createElement('a');
+  a.href = 'https://open.kakao.com/o/sGSSodii';
+  a.target = '_blank';  /* 새 탭에서 열기 → 채용 페이지 탭이 그대로 유지됨 */
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  // 복귀 안내 토스트
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ═══════════════════════════════════════════
+//  이탈 후 재접속 시 첫 페이지로 리셋
+// ═══════════════════════════════════════════
+// 앱이 백그라운드로 갔다가 다시 보이거나, 브라우저 탭으로 돌아올 때
+// 항상 1페이지(인덱스 0)부터 다시 보이도록 설정
+function resetToFirstPage() {
+  // 이미 첫 페이지면 불필요한 애니메이션 방지
+  if (typeof curPage === 'number' && curPage !== 0) {
+    goToPage(0);
+  }
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    resetToFirstPage();
+  }
+});
+
+window.addEventListener('focus', () => {
+  resetToFirstPage();
+});
 </script>
 </body>
 </html>
